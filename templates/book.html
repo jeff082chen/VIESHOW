@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files 	-->
+	<!-- <link rel="stylesheet" href="css/1.css"> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script>
+		$( function() {
+			$( "#accordion" ).accordion({
+			collapsible: true
+		});
+		} );
+	</script>
+	<script>
+		function openCity(evt, cityName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(cityName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+	</script>
+</head>
+
+<style>
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px  #ccc;
+  background-color: #020d18;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #abb7c4;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #233a50;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+.food{
+	display: block;
+	float: left;
+	margin:25px 50px 75px;
+}
+#accordion {
+	color: #f1f1f1;
+}
+#foodtab{
+	color: #f1f1f1;
+}
+
+</style>
+
+<body style="background-color:#020d18;">
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header logo">
+						<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<div id="nav-icon1">
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+						</div>
+						<a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav flex-child-menu menu-left">
+							<li class="hidden">
+								<a href="#page-top"></a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav flex-child-menu menu-right">
+							<li><a href="theater.html">影城介紹</a></li>
+							<li><a href="movies.html">電影介紹</a></li>
+							<li><a href="order.html">前往訂票</a></li>
+							<li><a href="ticket_record.html">訂票紀錄</a></li>						
+							<li><a href="member_service.html">會員服務</a></li>
+							<li><a href="index.html">會員登出</a></li>
+						</ul>
+					</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+			
+			<!-- top search form -->
+		</div>
+	</header>
+	<!-- END | Header -->
+	<div class="hero user-hero" style="height: auto;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="hero-ct">
+						<div  style="display: block; float: inline-start;">
+							<h1>(數位)阿凡達：水之道</h1>
+							<h2>(DIG)AVATAR THE WAY OF WATER</h2>
+						</div>
+						<div style="display: block; float: right; color: #ddd; ">
+							<ul>
+								<li>2022/12/19 19:00</li>
+								<li>台北信義威秀影城</li>
+								<li>第10廳</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<diV style="display: block;">
+		<div class="container" style="color: #f1f1f1; width: 50%; float: left; position: relative; left: 150px; background-color:#020d18;">
+			<div>
+				<div>
+					<div >
+						<h1 style="display: block; float: left; color: #f1f1f1;">選擇電影票</h1>
+						<h3 style="display: block; float: left; color: #333 ">選擇您希望購買的電影票張數和類型.請注意系統將自動為您保留可訂的最佳座位, 每筆交易最多可購買10張電影票</h3>
+						<div id="accordion">
+							<h3 style="font-size: 25px; float: left; display: block; margin: 15px;">優惠套票</h3>
+							<div>
+								<table>
+									<thead>
+										<tr>
+											<th nowrap>票種</th>
+											<th nowrap>價格</th>
+											<th nowrap>數量</th>
+											<th nowrap>合計</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<div class="row">
+													<div class="tic_img">
+														<img alt="" src="images/logo2.png">
+													</div>
+													<div class="tic_info">
+														<span class="tic_name">阿凡達水之道雙人電影套票</span><br>
+														<small class="tic_content">2張電影票+1中爆米花+1大杯飲料+1阿凡達3D公仔杯飲料+1熱狗+1張阿凡達電影海報 (12/09起開放領取)(海報12/21起領取)</small>
+													</div>
+												</div>
+											</td>
+											<td>
+												<span class="price">$<span class="realprice">252</span></span>
+											</td>
+											<td>
+												<select class="" id="">
+													<option selected="selected" value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+											</td>
+											<td>
+												0
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<h3  style="font-size: 25px; float: left; display: block; margin: 15px;">銀行優惠套票</h3>
+							<div>
+								<table>
+									<thead>
+										<tr>
+											<th nowrap>票種</th>
+											<th nowrap>價格</th>
+											<th nowrap>數量</th>
+											<th nowrap>合計</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<div class="row">
+													<div class="tic_info">
+														<span class="tic_name">台新銀行平日優惠</span><br>
+														<small class="tic_content">凡持台新信用卡即可享有此優惠，每日限4張。適用影片為：平日2D(片長超過180分鐘)</small>
+													</div>
+												</div>
+											</td>
+											<td>
+												<span class="price">$<span class="realprice">1,039</span></span>
+											</td>
+											<td>
+												<select class="" id="">
+													<option selected="selected" value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+											</td>
+											<td>
+												0
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<h3 style="font-size: 25px; float: left; display: block; margin: 15px;">一般票種</h3>
+							<div>
+								<table>
+									<thead>
+										<tr>
+											<th nowrap>票種</th>
+											<th nowrap>價格</th>
+											<th nowrap>數量</th>
+											<th nowrap>合計</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<div class="row">
+													<div class="tic_info">
+														<span class="tic_name">全票</span><br>
+													</div>
+												</div>
+											</td>
+											<td>
+												<span class="price">$<span class="realprice">360</span></span>
+											</td>
+											<td>
+												<select class="" id="">
+													<option selected="selected" value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+											</td>
+											<td>
+												0
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="row">
+													<div class="tic_info">
+														<span class="tic_name">優待票</span><br>
+													</div>
+												</div>
+											</td>
+											<td>
+												<span class="price">$<span class="realprice">340</span></span>
+											</td>
+											<td>
+												<select class="" id="">
+													<option selected="selected" value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+											</td>
+											<td>
+												0
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div >
+					<div>
+						<h1>選擇餐飲</h1>
+						<h3 style="color: #333;">請選擇販賣部商品並結帳</h3>
+						<div class="tab">
+							<button class="tablinks" onclick="openCity(event, 'drink')">飲料類</button>
+							<button class="tablinks" onclick="openCity(event, 'hotfood')">熱食類</button>
+							<button class="tablinks" onclick="openCity(event, 'bankfood')">銀行優惠餐</button>
+							<button class="tablinks" onclick="openCity(event, 'popcorn')">爆米花類</button>
+						</div>  
+						<div id="drink" class="tabcontent" style="display: block; height: 100px;">
+							<div id="bigcola" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>大可樂</span><br>
+									<span class="price">$<span class="realprice">64</span></span>
+								  	<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+							<div id="midcola" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>中可樂</span><br>
+									<span class="price">$<span class="realprice">55</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<ption value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+							<div id="litcola" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>小可樂</span><br>
+									<span class="price">$<span class="realprice">51</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div id="hotfood" class="tabcontent">
+							<div id="hotdog" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>熱狗</span><br>
+									<span class="price">$<span class="realprice">110</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+							<div id="churro" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>吉拿棒</span><br>
+									<span class="price">$<span class="realprice">110</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div id="bankfood" class="tabcontent">
+							<div id="citi" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>訂票花旗中可小爆加購</span><br>
+									<span class="price">$<span class="realprice">49</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+							<div id="tai" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>訂票台新中可小爆</span><br>
+									<span class="price">$<span class="realprice">80</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div id="popcorn" class="tabcontent">
+							<div id="bigpop" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>大爆米花</span><br>
+									<span class="price">$<span class="realprice">123</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+							<div id="midpop" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>中爆米花</span><br>
+									<span class="price">$<span class="realprice">115</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+							<div id="litpop" class="food">
+								<div>
+									<img src="images/logo1.png">
+								</div>
+								<div>
+									<span>小爆米花</span><br>
+									<span class="price">$<span class="realprice">106</span></span>
+									<select class="" id="">
+										<option selected="selected" value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="display: block; float: left; width: 40%;position: relative; left: 300px; background-color:#020d18;">
+			<div class="page-single" >
+				<div class="container">
+					<div class="row ipad-width">
+						<div class="col-md-91 col-sm-12 col-xs-12" style="width: 30%;">
+							<div class="form-style-1 user-pro" action="#">
+								<form action="#" class="user">
+									<h4>會員專區</h4>
+									<div >
+										<img src="images/logo1.png">
+										<div style="display: block;float: right;">
+											<h5 >一般影迷</h5>
+											<a>Hi!</a><a>XXX</a>
+										</div>
+									</div>
+									<div id="Barcode">
+										<a>1234567891234567</a>
+										<img src="images/logo1.png" width="100px">
+									</div>
+									<div class="col-md-61 form-it">
+										<label>iShow點數：</label>
+										<a>0</a>
+										<buttom style="display: block; float: right;"><a href="">點數紀錄</a></buttom>
+									</div>
+									<div class="col-md-61form-it">
+										<label>儲值金餘額：</label>
+										<a>0</a>
+										<buttom style="display: block; float: right;"><a href="">儲值紀錄</a></buttom>
+									</div>
+									<div class="col-md-61 form-it">
+										<label>年度消費金額：</label>
+										<a>0</a>
+										<buttom style="display: block; float: right;"><a href="">信用卡登陸/查詢紀錄</a></buttom>
+									</div>
+									<div class="col-md-61 form-it" style="display: block; float: right;">
+										<label>會員期限:</label>
+										<a>永久會員</a>
+									</div>
+									<div>
+										<buttom><a href="">我要儲值</a></buttom>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<buttom class="gobook" style="background-color: red;">
+				<a href="bookseat.html" style=" display: block; margin:100px 300px;float: left; color:#f1f1f1; font-size: 25px;">前往訂票</a>
+			</buttom>
+		</div>
+	</diV>
+<footer class="ht-footer">
+	<div class="container">
+		<div class="flex-parent-ft">
+			<div class="flex-child-ft item1">
+			</div>
+			<div class="flex-child-ft item2">
+			</div>
+			<div class="flex-child-ft item3">
+			</div>
+			<div class="flex-child-ft item4">
+			</div>
+			<div class="flex-child-ft item5">
+			</div>
+		</div>
+	</div>
+	<div class="ft-copyright">
+		<div class="ft-left">
+			<p><a target="_blank">Veishow</a></p>
+		</div>
+		<div class="backtotop">
+			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
+		</div>
+	</div>
+</footer>
+
+</body>
+
+
