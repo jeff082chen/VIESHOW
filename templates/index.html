@@ -1,60 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<!-- templates/index.html -->
+{% extends "base.html" %}
 
-<head>
-	<!-- Basic need -->
-	<title>Open Pediatrics</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-	<link rel="profile" href="#">
-	<!-- Mobile specific meta -->
-	<meta name=viewport content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone-no">
-	<!-- CSS files 	-->
-	<link rel="stylesheet" href="css/style.css">
-</head>
+{% block navigation %}
+    {{ super() }}
+{% endblock navigation %}
 
-<body style="background-color:#020d18;">
-
-<!-- BEGIN | Header -->
-<header class="ht-header">
-	<div class="container">
-		<nav class="navbar navbar-default navbar-custom">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header logo">
-				<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<div id="nav-icon1">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</div>
-				<a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav flex-child-menu menu-left">
-					<li class="hidden">
-						<a href="#page-top"></a>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav flex-child-menu menu-right">
-					<li><a href="theater.html">影城介紹</a></li>
-					<li><a href="movies.html">電影介紹</a></li>
-					<li><a href="member_service.html">會員專區</a></li>
-					<li><a href="login.html">會員登入</a></li>
-				</ul>
-			</div>
-		<!-- /.navbar-collapse -->
-		</nav>
-	<!-- top search form -->
-	</div>
-</header>
-<!-- END | Header -->
-
+{% block content %}
 <div class="hero user-hero" >
 	<div class="container">
 		<div class="row" >
@@ -65,7 +16,7 @@
 </div>
 <div class="page-single">
 	<div class="container" style="display: block; width: 50%; float: left;">
-		<div class="row ipad-width" style="">
+		<div class="row ipad-width">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
 						<h4>快速訂票</h4>
@@ -145,7 +96,7 @@
 		</div>
 	</div>
 	<div class="container" style="display: block; width: 50%; float: left;">
-		<div class="row ipad-width" style="">
+		<div class="row ipad-width">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
 						<h4>快搜空位</h4>
@@ -296,12 +247,8 @@
 			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
 		</div>
 	</div>
+{% endblock content %}
 
-<script src="js/jquery.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/plugins2.js"></script>
-<script src="js/custom.js"></script>
-</body>
-
-
-</html>
+{% block script %}
+	{{ super() }}
+{% endblock script %}

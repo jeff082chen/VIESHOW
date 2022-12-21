@@ -1,74 +1,30 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<!-- templates/index.html -->
+{% extends "base.html" %}
 
-<head>
-	<!-- Basic need -->
-	<title>Open Pediatrics</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-	<link rel="profile" href="#">
-	<!-- Mobile specific meta -->
-	<meta name=viewport content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone-no">
-	<!-- CSS files 	-->
-	<link rel="stylesheet" href="css/style.css">
+{% block style %}
 	<style>
-.movieitem{
-  display: block;
-  margin: 0 10% 0 5%;
-}
-.movieitem figure img{
-  display: block;
-  float: left;
-  width: 250px;
-}
-.movieiteminfo{
-  display: block;
-  float: left;
-  margin: 3% 3% 0 2% ;
-
-}
+		.movieitem{
+		display: block;
+		margin: 0 10% 0 5%;
+		}
+		.movieitem figure img{
+		display: block;
+		float: left;
+		width: 250px;
+		}
+		.movieiteminfo{
+		display: block;
+		float: left;
+		margin: 3% 3% 0 2% ;
+		}
 	</style>
-</head>
+{% endblock style %}
 
-<body style="background-color:#020d18;">
-<!-- BEGIN | Header -->
-	<header class="ht-header">
-		<div class="container">
-			<nav class="navbar navbar-default navbar-custom">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header logo">
-					<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<div id="nav-icon1">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-					</div>
-					<a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
-				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav flex-child-menu menu-left">
-						<li class="hidden">
-							<a href="#page-top"></a>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<li><a href="theater.html">影城介紹</a></li>
-						<li><a href="movies.html">電影介紹</a></li>
-						<li><a href="member_service.html">會員專區</a></li>
-						<li><a href="login.html">會員登入</a></li>
-					</ul>
-				</div>
-			<!-- /.navbar-collapse -->
-			</nav>
-		<!-- top search form -->
-		</div>
-	</header>
+{% block navigation %}
+    {{ super() }}
+{% endblock navigation %}
+
+{% block content %}
 <!--雙北-->
 	<div class="hero user-hero">
 		<div class="container">
@@ -90,13 +46,13 @@
 							<td>
 								<div class="movieitem">
 									<figure class="movieitem_img">
-										<a href="movieintro.html">
-											<img src="images/R.jpg" alt="">
+										<a href="/movieintro">
+											<img src="{{ url_for('static', filename = 'images/R.jpg') }}" alt="">
 										</a>
 									</figure>
 									<div class="movieiteminfo">
 										<h2>
-											<a href="movieintro.html">阿凡達：水之道</a>
+											<a href="/movieintro">阿凡達：水之道</a>
 										</h2>
 										<h3>
 											<a>AVATAR THE WAY OF WATER</a>
@@ -107,52 +63,16 @@
 							<td>
 								<div class="movieitem">
 									<figure class="movieitem_img">
-										<a href="movieintro.html">
-											<img src="images/R.jpg" alt="">
+										<a href="/movieintro">
+											<img src="{{ url_for('static', filename = 'images/R.jpg') }}" alt="">
 										</a>
 									</figure>
 									<div class="movieiteminfo">
 										<h2>
-											<a href="movieintro.html">阿凡達：水之道</a>
-										</h2>
-										<h3>
-											<a href="movieintro.html">AVATAR THE WAY OF WATER</a>
-										</h3>
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="movieitem">
-									<figure class="movieitem_img">
-										<a href="movieintro.html">
-											<img src="images/R.jpg" alt="">
-										</a>
-									</figure>
-									<div class="movieiteminfo">
-										<h2>
-											<a href="movieintro.html">阿凡達：水之道</a>
+											<a href="/movieintro">阿凡達：水之道</a>
 										</h2>
 										<h3>
 											<a>AVATAR THE WAY OF WATER</a>
-										</h3>
-									</div>
-								</div>
-							</td>
-							<td>
-								<div class="movieitem">
-									<figure class="movieitem_img">
-										<a href="movieintro.html">
-											<img src="images/R.jpg" alt="">
-										</a>
-									</figure>
-									<div class="movieiteminfo">
-										<h2>
-											<a href="movieintro.html">阿凡達：水之道</a>
-										</h2>
-										<h3>
-											<a href="movieintro.html">AVATAR THE WAY OF WATER</a>
 										</h3>
 									</div>
 								</div>
@@ -163,39 +83,12 @@
 			</div>
 		</div>
 	</diV>
+{% endblock content %}
 
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}
 
-<!-- footer section-->
-<footer class="ht-footer">
-	<div class="container">
-		<div class="flex-parent-ft">
-			<div class="flex-child-ft item1">
-			</div>
-			<div class="flex-child-ft item2">
-			</div>
-			<div class="flex-child-ft item3">
-			</div>
-			<div class="flex-child-ft item4">
-			</div>
-			<div class="flex-child-ft item5">
-			</div>
-		</div>
-	</div>
-	<div class="ft-copyright">
-		<div class="ft-left">
-			<p><a target="_blank">Veishow</a></p>
-		</div>
-		<div class="backtotop">
-			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
-		</div>
-	</div>
-</footer>
-<!-- end of footer section-->
-<script src="js/jquery.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/plugins2.js"></script>
-<script src="js/custom.js"></script>
-</body>
-
-
-</html>
+{% block script %}
+	{{ super() }}
+{% endblock script %}
