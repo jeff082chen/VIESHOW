@@ -375,17 +375,23 @@ def get_member_info(account: str, /, db = db) -> dict:
 
 
 
-def edit_member_info( mem_name:str, info_email:str, info_phone:str, info_birthday:str, info_creditcardnum: str , / , db=db): -> bool:
+def edit_member_info( account: str,mem_name:str, info_email:str, info_phone:str, info_birthday:str, info_creditcardnum: str , / , db=db) -> bool:
     
-with db.cursor() as cursor:
+    with db.cursor() as cursor:
             
             try:
+                command = "SELECT `member_information_id` FROM `member` WHERE account =%s;" 
+                cursor.execute(command , account)
+                result = cursor.fetchone()            
+                info_id = result
+
                 command = "UPDATE `member_information` SET `mem_name`=%s,`info_email`=%s,`info_phone`=%s,`info_birthday`=%s,`info_creditcardnum`=%s WHERE info_id = %s;" 
-                cursor.execute(command , ( mem_name, info_email, info_phone, info_birthday, info_creditcardnum))
+                cursor.execute(command , ( mem_name, info_email, info_phone, info_birthday, info_creditcardnum,info_id))
             except:
                 db.rollback()
 
             cursor.close()
+    
     return True
 
 # def book_tickets():
