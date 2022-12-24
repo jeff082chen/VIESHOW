@@ -25,10 +25,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>填寫會員資料</h1>
+					<h1>信箱驗證</h1>
 					<ul class="breadcumb">
 						<li class="active"><a href="#">首頁</a></li>
-						<li> <span class="ion-ios-arrow-right"></span>申辦會員</li>
+						<li> <span class="ion-ios-arrow-right"></span>信箱驗證</li>
 					</ul>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 		<div class="row ipad-width">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro">
-					<form action="/register" method="post">
+					<form action="/verification" method="post">
 						<!-- <div class="row">
 							<div class="col-md-6 form-it">
 								<label>請輸入您的身分證或居留證號碼</label>
@@ -49,46 +49,24 @@
 						</div> -->
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>您的姓名</label>
-								<input type="text" id="name" name="name" placeholder="小明" required>
-							</div>
-							<div class="col-md-6 form-it">
-								<label>西元出生日期</label>
-								<input type="date" id="birthday" name="birthday" placeholder="年/月/日" required>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<label>手機號碼</label>
-								<input type="text" id="phone" name="phone" placeholder="0000000000" required>
-							</div>
-							<div class="col-md-6 form-it">
 								<label>網路帳號信箱</label>
 								<input type="email" id="email" name="email" placeholder="Larry@gmail.com" required>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<label>信用卡號</label>
-								<input type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" id="creditcard" name="creditcard" placeholder="xxxx xxxx xxxx xxxx">
-							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>網路帳號密碼</label>
 								<input type="password" id="password" name="password" placeholder="********" required>
 							</div>
-							<div class="row">
+						</div>
+						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>再輸入一次</label>
-								<input type="password" id="password_confirmation" name="password_confirmation" placeholder="********" required>
-							</div>
+								<label>信箱驗證碼</label>
+								<input type="text" id="verification_code" name="verification_code" placeholder="********" required>
 							</div>
 						</div>
 						<div class="row">
 							<div class="submit" style="text-align:center">
 								<div style="color:red;"> {{ errorMsg|safe }} </div>
-								<button type="submit" class="btn btn-outline-warning button" style="width: 200px;">註冊</button>
+								<button type="submit" class="btn btn-outline-warning button" style="width: 200px;">送出</button>
 							</div>
 						</div>	
 					</form>

@@ -241,7 +241,35 @@ def create_new_member(account: str, password: str,mem_name:str, mem_email: str, 
     with db.cursor() as cursor:
         
         try:
-            command = "INSERT INTO `member`(`account`, `password`, `mem_name`, `mem_email`, `mem_phone`, `mem_birthday`, `mem_point`, `mem_creditcardnum`, `mem_veri`, `veri_pass`) VALUES  ('{account}','{password}'.'{mem_name}','{mem_email}','{mem_phone}','{mem_birthday}','0','{mem_veri}','0');" 
+            command = f'INSERT INTO `member` (`account`, `password`, `mem_name`, `mem_email`, `mem_phone`, `mem_birthday`, `mem_point`, `mem_creditcardnum`, `mem_veri`, `veri_pass`) VALUES ("{account}","{password}","{mem_name}","{mem_email}","{mem_phone}","{mem_birthday}","0","{mem_creditcard_num}","{mem_veri}","0");'
+            cursor.execute(command)
+            db.commit()
+        except:
+            db.rollback()
+            return False
+
+        cursor.close()
+
+    return True
+
+def member_is_valid(account: str, /, db = db) -> bool:
+
+    with db.cursor() as cursor:
+        try:
+            command = f'SELECT `veri_pass` FROM member WHERE account = "{account}"'
+            cursor.execute(command)
+            result = cursor.fetchone()
+        except:
+           db.rollback()
+
+        cursor.close()
+    return result
+
+def verify_member(account: str, /, db = db):
+
+    with db.cursor() as cursor:
+        try:
+            command = f'UPDATE member SET `veri_pass` = 1 WHERE account = "{account}"'
             cursor.execute(command)
             db.commit()
         except:
@@ -249,13 +277,24 @@ def create_new_member(account: str, password: str,mem_name:str, mem_email: str, 
 
         cursor.close()
 
-    return True
-
 def get_member_password(account: str, /, db = db) -> str:
     
     with db.cursor() as cursor:
         try:
-            command = "SELECT `password` FROM `member` WHERE account ='{account}'" 
+            command = f"SELECT `password` FROM `member` WHERE account ='{account}'" 
+            cursor.execute(command)
+            result = cursor.fetchone()
+        except:
+           db.rollback()
+
+        cursor.close()
+    return result
+
+def get_member_verification_code(account: str, /, db = db) -> str:
+    
+    with db.cursor() as cursor:
+        try:
+            command = f"SELECT `mem_veri` FROM `member` WHERE account ='{account}'" 
             cursor.execute(command)
             result = cursor.fetchone()
         except:

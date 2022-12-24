@@ -5,6 +5,9 @@ import copy
 import pymysql
 from flask import *
 from flask_login import *
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 import api
 
 app = Flask(__name__)
@@ -133,21 +136,11 @@ def login():
     user_password = request.form['password']
     user_password += salt
     user_password = hashlib.sha256(user_password.encode()).hexdigest()
-    db = get_db()
-    cur = db.cursor()
-    cur.execute(
-        'SELECT validated FROM members WHERE account = %s', (user_id, )
-    )
-    validated = cur.fetchone()[0]
-    print(validated, "\n\n\n\n\n\n")
+    validated = api.member_is_valid(user_id, db = get_db())[0]
     if validated == False:
         errorMsg='<span style="color:#35858B"></span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>此帳號尚未通過信箱驗證'
         return render_template('login.html', errorMsg = errorMsg)
-    password = cur.fetchone()
-    cur.execute(
-        'SELECT password FROM members WHERE account = %s', (user_id, )
-    )
-    password = cur.fetchone()
+    password = api.get_member_password(user_id, db = get_db())
     if not password:
         errorMsg='<span style="color:#35858B"></span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您輸入的帳號不存在'
         return render_template('login.html', errorMsg = errorMsg)
@@ -165,6 +158,67 @@ def login():
 def logout():
     logout_user()
     return redirect(request.args.get("next") or url_for('index'))
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'GET':
+        return render_template("register.html")
+    name = request.form['name']
+    birthday = request.form['birthday']
+    phone = request.form['phone']
+    email = request.form['email']
+
+    password = api.get_member_password(email, db = get_db())
+    if password:
+        errorMsg='<span style="color:#35858B"></span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您輸入的帳號已存在'
+        return render_template('register.html', errorMsg = errorMsg)
+
+    creditcard = request.form['creditcard']
+    password = request.form['password']
+    password_confirmation = request.form['password_confirmation']
+    if password_confirmation != password:
+        errorMsg='<span style="color:#35858B"></span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您輸入的密碼有誤'
+        return render_template('register.html', errorMsg = errorMsg)
+    password += salt
+    password = hashlib.sha256(password.encode()).hexdigest()
+    verification_code = os.urandom(5).hex()
+    api.create_new_member(email, password, name, email, phone, birthday, creditcard, verification_code, db = get_db())
+
+    content = MIMEMultipart()  #建立MIMEMultipart物件
+    content["subject"] = f"VIESHOW 信箱驗證"  #郵件標題
+    content["from"] = "VIESHOW0000@gmail.com"  #寄件者
+    content["to"] = email #收件者
+    content.attach(MIMEText(f"您的信箱驗證碼為：{verification_code}\n驗證網址：http://127.0.0.1:5000/verification\n"))  #郵件內容
+
+    with smtplib.SMTP(host="smtp.gmail.com", port="587") as smtp:  # 設定SMTP伺服器
+        try:
+            smtp.ehlo()  # 驗證SMTP伺服器
+            smtp.starttls()  # 建立加密傳輸
+            # qwcmzdsooaygmoac
+            smtp.login("VIESHOW0000@gmail.com", "beztvmozbulzijru")  # 登入寄件者gmail
+            smtp.send_message(content)  # 寄送郵件
+            print("Complete!")
+        except Exception as e:
+            print("Error message: ", e)
+
+    return redirect(url_for('index'))
+
+@app.route('/verification', methods=['GET', 'POST'])
+def verification():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'GET':
+        return render_template("verification.html")
+    email = request.form['email']
+    password = request.form['password']
+    verification_code = request.form['verification_code']
+    if verification_code != api.get_member_verification_code(email, db = get_db())[0]:
+        errorMsg='<span style="color:#35858B"></span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您輸入的驗證碼有誤'
+        return render_template('verification.html', errorMsg = errorMsg)
+    api.verify_member(email, db = get_db())
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug = True, port = 5000)
