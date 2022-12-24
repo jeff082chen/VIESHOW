@@ -7,11 +7,7 @@ db = pymysql.connect(
     db='db', 
     charset='utf8'
 )
-  
-
 def get_movie_info(title: str, /, db = db) -> dict:
-    
-    
     
     with db.cursor() as cursor:
         
@@ -128,44 +124,72 @@ def get_studio_info(studio_name: str, /, db = db) -> dict:
         cursor.close()
     return studio_info
 
-
-
 def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /, db = db) -> list[dict]:
     
     with db.cursor() as cursor:
         sessions_info= {}
-        
-
-        command = "SELECT `movie_cinema` FROM movie  WHERE (movie_cinema = %s) AND (movie_name = %s) AND (movie_date = %s) AND (movie_time = %s) ORDER BY movie_name DESC ;" 
+        command= "SELECT `movie_cinema` FROM movie  WHERE 1"
+        if studio_name is not None:
+            command += "AND movie_cinema = '{studio_name}' "
+        if movie_title is not None:
+            command += "AND movie_name = '{movie_title}' "
+        if date is not None:
+            command += "AND movie_date = '{date}' "
+        if time is not None:
+            command += "AND movie_time = '{time}' "
         try:    
-            cursor.execute(command , (studio_name,movie_title,date,time))
+            cursor.execute(command)
             result = cursor.fetchall()
         except:
             db.rollback()
         sessions_info['movie_cinema'] = result
 
 
-        command = "SELECT `movie_name` FROM movie  WHERE (movie_cinema = %s) AND (movie_name = %s) AND (movie_date = %s) AND (movie_time = %s) ORDER BY movie_name DESC ;" 
-        try:
-            cursor.execute(command , (studio_name,movie_title,date,time))
+        command= "SELECT `movie_name` FROM movie  WHERE 1"
+        if studio_name is not None:
+            command += "AND movie_cinema = '{studio_name}' "
+        if movie_title is not None:
+            command += "AND movie_name = '{movie_title}' "
+        if date is not None:
+            command += "AND movie_date = '{date}' "
+        if time is not None:
+            command += "AND movie_time = '{time}' "
+        try:     
+            cursor.execute(command )
             result = cursor.fetchall()
         except:
             db.rollback()
         sessions_info['movie_name'] = result
 
 
-        command = "SELECT `movie_date` FROM movie  WHERE (movie_cinema = %s) AND (movie_name = %s) AND (movie_date = %s) AND (movie_time = %s) ORDER BY movie_name DESC ;" 
+        command= "SELECT `movie_date` FROM movie  WHERE 1"
+        if studio_name is not None:
+            command += "AND movie_cinema = '{studio_name}' "
+        if movie_title is not None:
+            command += "AND movie_name = '{movie_title}' "
+        if date is not None:
+            command += "AND movie_date = '{date}' "
+        if time is not None:
+            command += "AND movie_time = '{time}' "        
         try:
-            cursor.execute(command , (studio_name,movie_title,date,time))
+            cursor.execute(command)
             result = cursor.fetchall()
         except:
             db.rollback()
         sessions_info['movie_date'] = result
         
 
-        command = "SELECT `movie_time` FROM movie  WHERE (movie_cinema = %s) AND (movie_name = %s) AND (movie_date = %s) AND (movie_time = %s) ORDER BY movie_name DESC ;" 
+        command= "SELECT `movie_time` FROM movie  WHERE 1"
+        if studio_name is not None:
+            command += "AND movie_cinema = '{studio_name}' "
+        if movie_title is not None:
+            command += "AND movie_name = '{movie_title}' "
+        if date is not None:
+            command += "AND movie_date = '{date}' "
+        if time is not None:
+            command += "AND movie_time = '{time}' "        
         try:
-            cursor.execute(command , (studio_name,movie_title,date,time))
+            cursor.execute(command)
             result = cursor.fetchall()
         except:
             db.rollback()
@@ -175,41 +199,14 @@ def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /
 
     return sessions_info
 
-# def get_empty_seats(session_id: , /, db = db) -> dict:
-#     """ return empty seats remain of a session
-#     parameter:
-#         session id as a integer
-#     return value:
-#         a dictionary in a format as {'seat id': 'is_empty(bool)'}
-#         or None if session not exist
-#     """
-
-#     return {}
-
-# ... in parameter list needs to be replace as other member information
-
-def create_new_member(account: str, password: str,mem_name:str, info_email: str, info_phone:str, info_birthday,info_creditcard_num:str, /, db = db) -> bool:
+def create_new_member(account: str, password: str,mem_name:str, mem_email: str, mem_phone:str, mem_birthday,mem_creditcard_num:str,mem_veri: str, /, db = db) -> bool:
     
     with db.cursor() as cursor:
         
         try:
-            command = "INSERT INTO `member`(account, password) VALUES (%s,%s);" 
-            cursor.execute(command , (account,password))
+            command = "INSERT INTO `member`(`account`, `password`, `mem_name`, `mem_email`, `mem_phone`, `mem_birthday`, `mem_point`, `mem_creditcardnum`, `mem_veri`, `veri_pass`) VALUES  ('{account}','{password}'.'{mem_name}','{mem_email}','{mem_phone}','{mem_birthday}','0','{mem_veri}','0');" 
+            cursor.execute(command)
             db.commit()
-
-            command = "INSERT INTO `member_information`(`mem_name`, `info_email`, `info_phone`, `info_birthday`, `info_creditcardnum`) VALUES (%s,%s,%s,%s,%s);" 
-            cursor.execute(command,(mem_name,info_email,info_phone,info_birthday,info_creditcard_num))
-            db.commit()
-
-            command = "SELECT `member_information_id` FROM `member` WHERE account = %s;"
-            cursor.execute(command , account)
-            result = cursor.fetchone()
-            info_id = result
-
-            command = "INSERT INTO `rec_ticket`(mem_ticket_id) VALUES (%s);"
-            cursor.execute(command , info_id)
-            db.commit()
-
         except:
            db.rollback()
 
@@ -221,8 +218,8 @@ def get_member_password(account: str, /, db = db) -> str:
     
     with db.cursor() as cursor:
         try:
-            command = "SELECT `password` FROM `member` WHERE account =%s" 
-            cursor.execute(command , account)
+            command = "SELECT `password` FROM `member` WHERE account ='{account}'" 
+            cursor.execute(command)
             result = cursor.fetchone()
         except:
            db.rollback()
@@ -233,63 +230,54 @@ def get_member_password(account: str, /, db = db) -> str:
 def get_member_info(account: str, /, db = db) -> dict:
     
     with db.cursor() as cursor:
-        mem_info ={}
-        try:
-            command = "SELECT `member_information_id` FROM `member` WHERE account =%s;" 
-            cursor.execute(command , account)
-            result = cursor.fetchone()            
-            info_id = result
-            
-        except:
-            db.rollback()
-        
+        mem_info ={}        
         try:   
-            command = "SELECT `mem_name` FROM `member_information` WHERE info_id =%s;"
-            cursor.execute(command , info_id)
+            command = "SELECT `mem_name` FROM `member_information` WHERE account =%s;"
+            cursor.execute(command , account)
             result = cursor.fetchone()
             mem_info['mem_name'] = result
         except:
             db.rollback()
 
         try:   
-            command = "SELECT `info_email` FROM `member_information` WHERE info_id =%s;"
-            cursor.execute(command , info_id)
+            command = "SELECT `mem_email` FROM `member_information` WHERE account =%s;"
+            cursor.execute(command , account)
             result = cursor.fetchone()
-            mem_info['info_email'] = result
+            mem_info['mem_email'] = result
         except:
             db.rollback()
         
         try:   
-            command = "SELECT `info_phone` FROM `member_information` WHERE info_id =%s;"
-            cursor.execute(command , info_id)
+            command = "SELECT `mem_phone` FROM `member` WHERE account =%s;"
+            cursor.execute(command , account)
             result = cursor.fetchone()
-            mem_info['info_phone'] = result
+            mem_info['mem_phone'] = result
         except:
             db.rollback()
 
         try:   
-            command = "SELECT `info_birthday` FROM `member_information` WHERE info_id =%s;"
-            cursor.execute(command , info_id)
+            command = "SELECT `mem_birthday` FROM `member_information` WHERE account =%s;"
+            cursor.execute(command , account)
             result = cursor.fetchone()
-            mem_info['info_birthday'] = result
+            mem_info['mem_birthday'] = result
         except:
             db.rollback()  
         
         try:   
-            command = "SELECT `info_point` FROM `member_information` WHERE info_id =%s;"
-            cursor.execute(command , info_id)
+            command = "SELECT `mem_point` FROM `member_information` WHERE account =%s;"
+            cursor.execute(command , account)
             result = cursor.fetchone()
             if result =='NONE':
                 result = 0  
-            mem_info['info_point'] = result
+            mem_info['mem_point'] = result
         except:
             db.rollback()  
             
         try:   
-            command = "SELECT `info_creditcardnum` FROM `member_information` WHERE info_id =%s;"
-            cursor.execute(command , info_id)
+            command = "SELECT `mem_creditcardnum` FROM `member_information` WHERE account =%s;"
+            cursor.execute(command , account)
             result = cursor.fetchone()
-            mem_info['info_creditcardnum'] = result
+            mem_info['mem_creditcardnum'] = result
         except:
             db.rollback()
 
@@ -297,96 +285,23 @@ def get_member_info(account: str, /, db = db) -> dict:
 
     return mem_info
 
-
-
-# def get_booking_history(account: str, /, db = db) -> list[dict]:
-    
-#     with db.cursor() as cursor:
-#         booking_history ={}
-#         try:
-#             command = "SELECT `member_information_id` FROM `member` WHERE account =%s;" 
-#             cursor.execute(command , account)
-#             result = cursor.fetchone()            
-#             info_id = result
-#             booking_history ['mem_ticket_id'] = result
-
-#             command = "SELECT `rec_movie` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['rec_movie'] = result
-
-#             command = "SELECT  `rec_studio` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['rec_studio'] = result 
-            
-#             command = "SELECT  `rec_date` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['rec_date'] = result 
-            
-#             command = "SELECT  `rec_time` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['rec_time'] = result 
-            
-#             command = "SELECT  `rec_type` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['rec_type'] = result             
-            
-#             command = "SELECT  `rec_price` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['rec_price'] = result 
-
-#             command = "SELECT  `popcorn` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['popcorn'] = result 
-
-#             command = "SELECT  `drink` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['drink'] = result 
-
-#             command = "SELECT  `rec-seat` FROM `rec_ticket` WHERE mem_ticket_id = %s"
-#             cursor.execute(command , info_id)
-#             result = cursor.fetchone()
-#             booking_history ['rec-seat'] = result 
-   
-#         except:
-#             db.rollback()
-#     print(booking_history)
-
-#     return booking_history
-
-# get_booking_history('Larry')
-# def seat_available(session_id: str, seat_id: int, /, db = db) -> bool:
-#     """ check if a seat is available
-#     parameter:
-#         session id as a integer
-#         seat id as a integer
-#     return value:
-#         a bool value indicate weather the seat is available
-#     """
-
-#     return True
-
-
-
-def edit_member_info( account: str,mem_name:str, info_email:str, info_phone:str, info_birthday:str, info_creditcardnum: str , / , db=db) -> bool:
+def edit_member_info( account: str,mem_name:str, mem_email:str, mem_phone:str, mem_birthday:str, mem_creditcardnum: str , / , db=db) -> bool:
     
     with db.cursor() as cursor:
             
-            try:
-                command = "SELECT `member_information_id` FROM `member` WHERE account =%s;" 
-                cursor.execute(command , account)
-                result = cursor.fetchone()            
-                info_id = result
-
-                command = "UPDATE `member_information` SET `mem_name`=%s,`info_email`=%s,`info_phone`=%s,`info_birthday`=%s,`info_creditcardnum`=%s WHERE info_id = %s;" 
-                cursor.execute(command , ( mem_name, info_email, info_phone, info_birthday, info_creditcardnum,info_id))
+            command= "UPDATE `member` SET "
+            if mem_name is not None:
+                command += " `mem_name`= '{mem_name}' "
+            if mem_email is not None:
+                command += " `mem_eamil` = '{mem_email}' "
+            if mem_phone is not None:
+                command += " `mem_phone` = '{mem_phone}' "
+            if mem_birthday is not None:
+                command += " `mem_creditcardnum` = '{mem_creditcardnum}' "          
+            command += "WHERE 'account' = '{account};'"
+            try:    
+                cursor.execute(command)
+                db.commit()
             except:
                 db.rollback()
 
@@ -394,8 +309,174 @@ def edit_member_info( account: str,mem_name:str, info_email:str, info_phone:str,
     
     return True
 
-# def book_tickets():
-#     return
+def get_empty_seats(session_id: int , / , db = db) -> dict:
+    """ return empty seats remain of a session
+    parameter:
+    session id as a integer
+    return value:
+    a dictionary in a format as {'seat id': 'is_empty(bool)'}
+    or None if session not exist
+    """
+    with db.cursor() as cursor:
+        try:
+            command = "SELECT `seat` FROM `seat` WHERE `movie_ses` = %s AND seat_bool = 0;" 
+            cursor.execute(command,session_id)
+            result = cursor.fetchall()
+        except:
+           db.rollback()
 
-# def edit_booking_record(booking_id: int, ..., /, db = db) -> bool:
-#     return
+        cursor.close()
+
+    return result
+
+
+def get_booking_history(account: str, /, db = db) -> list[dict]:
+    
+    with db.cursor() as cursor:
+        booking_history ={}
+        
+        try:
+            command = "SELECT `rec_movie` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['rec_movie'] = result
+        except:
+            db.rollback()
+        
+        try:
+            command = "SELECT `rec_studio` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['rec_studio'] = result
+        except:
+            db.rollback()
+        
+        try:
+            command = "SELECT `rec_date` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['rec_date'] = result
+        except:
+            db.rollback()
+
+        try:
+            command = "SELECT `rec_time` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['rec_time'] = result
+        except:
+            db.rollback()
+        
+        try:
+            command = "SELECT `ticket_type` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['ticket_type'] = result
+        except:
+            db.rollback()
+
+        try:
+            command = "SELECT `ticket_price` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['ticket_price'] = result
+        except:
+            db.rollback()
+        
+        try:
+            command = "SELECT `drink` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['drink'] = result
+        except:
+            db.rollback()
+        
+        try:
+            command = "SELECT `popcorn` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['popcorn'] = result
+        except:
+            db.rollback()
+        
+        try:
+            command = "SELECT `rec_seat` FROM `rec_ticket` WHERE account = %s"
+            cursor.execute(command,account)
+            result = cursor.fetchall()
+            booking_history ['rec_seat'] = result
+        except:
+            db.rollback()
+            
+    return booking_history
+
+
+def book_tickets(account:str,rec_movie:str,rec_studio:str,rec_date:str,rec_time:str,ticket_type:str ,popcorn:str ,drink:str, rec_seat:str , / ,db=db):
+    
+    with db.cursor() as cursor:
+        command = "INSERT INTO `rec_ticket`(`account`, `rec_movie`, `rec_studio`, `rec_date`, `rec_time`, `ticket_type`, `type_price`, `rec-seat`, `popcorn`, `drink`) VALUES('{account}','{rec_movie}','{rec_studio}'.'{rec_date}','{rec_time}','{ticket_type}','{type_price}', '{rec_seat}'"
+        if popcorn is not None:
+            command += ",'{popcorn}'"
+        if drink is not None:
+            command += ",'{drink}'"
+        command +=");"
+        cursor.execute(command)
+        db.commit()
+
+        command = "SELECT `movie_ses` FROM `movie` WHERE 'movie_name' = '{rec_movie}' AND 'movie_cinema' = '{rec_studio}' AND 'movie_date' = '{rec_date}', AND 'movie_time' ='{movie_time}'; "
+        cursor.execute(command,())
+        ses_id = cursor.fetchone()
+        command = "UPDATE `seat` SET `seat_bool`='1' WHERE `movie_ses`=%s AND`seat` = %s "
+        try:    
+            cursor.execute(command,(ses_id,rec_seat))
+            db.commit()
+        except:
+            db.rollback()
+
+        cursor.close()
+    
+    return True
+
+def seat_available(session_id: int, seat_id: str, /, db = db) -> bool:
+    
+    with db.cursor() as cursor:
+        try:
+            command = "SELECT `seat_bool` FROM `seat` WHERE `movie_ses` = %s AND 'seat' = %s;" 
+            cursor.execute(command,(session_id,seat_id))
+            result = cursor.fetchone()
+            if result is not None:
+                return False
+        except:
+           db.rollback()
+
+        cursor.close()
+
+    return True
+
+def edit_booking_record(ticket_id: int, rec_movie:str,rec_studio:str,rec_date:str,rec_time:str,ticket_type:str,type_price:int,popcorn:str,drink:str,rec_seat:str, /, db = db) -> bool:
+    
+    with db.cursor() as cursor:
+        command= "UPDATE `rec_ticket` SET "
+        if rec_movie is not None:
+            command += " `rec_movie`= '{rec_movie}' "
+        if rec_studio is not None:
+            command += " `rec_studio` = '{rec_studio}' "
+        if rec_date is not None:
+            command += " `rec_date` = '{rec_date}' "
+        if rec_time is not None:
+            command += " `rec_time` = '{rec_time}' "    
+        if ticket_type is not None:
+            command += " `ticket_type` = '{ticket_type}' "  
+        if type_price is not None:
+            command += " `type_price` = '{type_price}' "  
+        if popcorn is not None:
+            command += " `popcorn` = '{popcorn}' " 
+        if drink is not None:
+            command += " `drink` = '{drink}' " 
+        if rec_seat is not None:
+            command += " `rec_seat` = '{rec_seat}' "     
+        command += "WHERE 'ticket_id' = '{ticket_id};'"
+        cursor.execute(command)
+        db.commit()
+        
+        cursor.close()
+    return True
