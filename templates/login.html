@@ -1,92 +1,25 @@
-<!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
-<html lang="en" class="no-js">
+<!-- templates/index.html -->
+{% extends "base.html" %}
 
-<!-- userprofile14:04-->
-<head>
-	<!-- Basic need -->
-	<title>Open Pediatrics</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-	<link rel="profile" href="#">
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+{% endblock style %}
 
-    <!--Google Font-->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600" />
-	<!-- Mobile specific meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone-no">
+{% block navigation %}
+    {{ super() }}
+{% endblock navigation %}
 
-	<!-- CSS files -->
-	<link rel="stylesheet" href="css/plugins.css">
-	<link rel="stylesheet" href="css/style.css">
-
-</head>
+{% block content %}
 <body>
 <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+    <img class="logo" src="{{ url_for('static', filename='images/logo1.png') }}" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
     </div>
 </div>
 <!--end of preloading-->
-
-<!-- BEGIN | Header -->
-<header class="ht-header">
-	<div class="container">
-		<nav class="navbar navbar-default navbar-custom">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header logo">
-				    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					    <span class="sr-only">Toggle navigation</span>
-					    <div id="nav-icon1">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-				    </div>
-				    <a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
-			    </div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav flex-child-menu menu-left">
-						<li class="hidden">
-							<a href="#page-top"></a>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<li class="dropdown first">
-							<ul class="nav navbar-nav flex-child-menu menu-right">
-								<li><a href="member_service.html">影城介紹</a></li>
-							</ul>
-						</li>
-						<li class="dropdown first">
-							<ul class="nav navbar-nav flex-child-menu menu-right">
-								<li><a href="member_service.html">電影介紹</a></li>
-							</ul>
-						</li>
-						<li class="dropdown first">
-							<ul class="nav navbar-nav flex-child-menu menu-right">
-								<li><a href="member_service.html">會員專區</a></li>
-							</ul>
-						</li>
-						<li><a href="member_service.html">會員服務</a></li>
-					</ul>
-				</div>
-			<!-- /.navbar-collapse -->
-	    </nav>
-	</div>
-</header>
-<!-- END | Header -->
 
 <div class="hero user-hero">
 	<div class="container">
@@ -108,23 +41,24 @@
 		<div class="row ipad-width">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
-					<form action="#" class="user">
+					<form action="{{ url_for('login', next=next) }}" method="post">
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>網路帳號信箱</label>
-								<input type="text" placeholder="Larry@gmail.com">
+								<input type="text" id="account" name="account" placeholder="Larry@gmail.com">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>網路帳號密碼</label>
-								<input type="text" placeholder="********">
+								<input type="text" id="password" name="password" placeholder="********">
 							</div>
 							<div class="row">
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<a class="loginbutton" href="member_service.html" >登入</a>
+								<div style="color:red;"> {{ errorMsg|safe }} </div>
+								<button type="submit" class="btn btn-outline-warning button" style="width: 200px;">登入</button>
 							</div>
 						</div>
                         <div class="row">
@@ -141,38 +75,12 @@
 		</div>
 	</div>
 </div>
-<!-- footer section-->
-<footer class="ht-footer">
-	<div class="container">
-		<div class="flex-parent-ft">
-			<div class="flex-child-ft item1">
-			</div>
-			<div class="flex-child-ft item2">
-			</div>
-			<div class="flex-child-ft item3">
-			</div>
-			<div class="flex-child-ft item4">
-			</div>
-			<div class="flex-child-ft item5">
-			</div>
-		</div>
-	</div>
-	<div class="ft-copyright">
-		<div class="ft-left">
-			<p><a target="_blank">Veishow</a></p>
-		</div>
-		<div class="backtotop">
-			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
-		</div>
-	</div>
-</footer>
-<!-- end of footer section-->
+{% endblock content %}
 
-<script src="js/jquery.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/plugins2.js"></script>
-<script src="js/custom.js"></script>
-</body>
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}
 
-<!-- userprofile14:04-->
-</html>
+{% block script %}
+	{{ super() }}
+{% endblock script %}

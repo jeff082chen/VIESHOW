@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="hero-ct">
-						<h1>雙北</h1>
+						<h1>影城列表</h1>
 					</div>
 				</div>
 			</div>
@@ -23,27 +23,50 @@
 			<div>
 				<div>
 					<table>
+						{% for theater_pair in theaters %}
 						<tr>
 							<td>
 								<div class="theateritem">
 									<figure class="theateritem_img">
-										<a href="/cineplex">
+										<a href="/cineplex?name={{ theater_pair[0][0] }}">
 											<img src="{{ url_for('static', filename='images/vsimg.png') }}" alt="">
 										</a>
 									</figure>
 									<div class="theateriteminfo">
 										<h2>
-											<a href="/cineplex">台北信義威秀影城</a>
+											<a href="/cineplex?name={{ theater_pair[0][0] }}">{{ theater_pair[0][0] }}</a>
 										</h2>
 										<h3>
-											<a href="/cineplex">Vie Show Cinemas Taipei Hsin Yi</a>
+											<a href="/cineplex?name={{ theater_pair[0][0] }}">Vie Show Cinemas Taipei Hsin Yi</a>
 										</h3>
-										<p>影城地址：台北市信義區松壽路20號</p>
-										<p>服務專線：(02) 8780-5566</p>
+										<p>影城地址：{{ theater_pair[0][1] }}</p>
+										<p>服務專線：{{ theater_pair[0][2] }}</p>
 									</div>
 								</div>
 							</td>
+							{% if theater_pair[1] %}
+							<td>
+								<div class="theateritem">
+									<figure class="theateritem_img">
+										<a href="/cineplex?name={{ theater_pair[1][0] }}">
+											<img src="{{ url_for('static', filename='images/vsimg.png') }}" alt="">
+										</a>
+									</figure>
+									<div class="theateriteminfo">
+										<h2>
+											<a href="/cineplex?name={{ theater_pair[1][0] }}">{{ theater_pair[1][0] }}</a>
+										</h2>
+										<h3>
+											<a href="/cineplex?name={{ theater_pair[1][0] }}">Vie Show Cinemas Taipei Hsin Yi</a>
+										</h3>
+										<p>影城地址：{{ theater_pair[1][1] }}</p>
+										<p>服務專線：{{ theater_pair[1][2] }}</p>
+									</div>
+								</div>
+							</td>
+							{% endif %}
 						</tr>
+						{% endfor %}
 					</table>
 				</div>
 			</div>

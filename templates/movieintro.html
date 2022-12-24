@@ -1,16 +1,52 @@
-<!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
-
 <!-- templates/index.html -->
 {% extends "base.html" %}
 
 {% block style %}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+	<style>
+		.tab {
+		  overflow: hidden;
+		  border: 1px  #ccc;
+		  background-color: #020d18;
+		}
+			.tab button {
+		  background-color: inherit;
+		  float: left;
+		  border: none;
+		  outline: none;
+		  cursor: pointer;
+		  padding: 14px 16px;
+		  transition: 0.3s;
+		  font-size: 17px;
+		}
+		
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+		  background-color: #abb7c4;
+		}
+		
+		/* Create an active/current tablink class */
+		.tab button.active {
+		  background-color: #233a50;
+		}
+		
+		/* Style the tab content */
+		.tabcontent {
+		  display: none;
+		  padding: 6px 12px;
+		  -webkit-animation: fadeEffect 1s;
+		  animation: fadeEffect 1s;
+		}
+		
+		/* Fade in tabs */
+		@-webkit-keyframes fadeEffect {
+		  from {opacity: 0;}
+		  to {opacity: 1;}
+		}
+		#accordion {
+			color: #f1f1f1;
+		}
+	</style>
 {% endblock style %}
 
 {% block navigation %}
@@ -36,7 +72,7 @@
 			</div>
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
-					<h1 class="bd-hd">阿凡達：水之道 <br><span>AVATAR THE WAY OF WATER</span></h1>
+					<h1 class="bd-hd">{{ info['movie_name'] }} <br><span>AVATAR THE WAY OF WATER</span></h1>
 					<div class="movie-tabs">
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
@@ -46,7 +82,7 @@
 						        <div id="overview" class="tab active">
 						            <div class="row">
 						            	<div class="col-md-8 col-sm-12 col-xs-12">
-						            		<p>《阿凡達：水之道》設於首集超過十年後，成為納美人並與奈蒂莉共結連理的傑克，在潘朵拉星上與他們的孩子組成蘇里一家，過著與世無爭的幸福生活，未料威脅再度降臨，他們不遺餘力保護彼此，為了生存再度奮戰，還得承受隨之而來的悲痛創傷。</p>
+						            		<p>{{ info['movie_info'][0] }} </p>
 						            		<div class="title-hd-sm">
 												<h4>trailers</h4>
 											</div>
@@ -60,25 +96,79 @@
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
 						            		<div class="sb-it">
 						            			<h6>Director: </h6>
-						            			<p><a href="#">詹姆斯卡麥隆</a></p>
+						            			<p><a href="#">{{ info['movie_director'][0] }} </a></p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Stars: </h6>
-						            			<p><a href="#">山姆沃辛頓,</a> <a href="#">柔伊莎達娜,</a> <a href="#">凱特溫絲蕾,</a><a href="#">雪歌妮薇佛,</a><a href="#">楊紫瓊,</a><a href="#">傑梅奈克萊門特</a></p>
+						            			<p><a href="#">{{ info['movie_actor'][0] }}</a></p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Genres:</h6>
-						            			<p><a href="#">奇幻/科幻, </a> <a href="#"> 冒險,</a> <a href="#">劇情</a></p>
+						            			<p><a href="#">{{ info['movie_type'][0] }}</a></p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Run Time:</h6>
-						            			<p>3 hr 12 min</p>
+						            			<p>{{ info['movie_time'][0] }}</p>
 						            		</div>
 						            	</div>
 						            </div>
 						        </div>
 						    </div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="Info" >
+	<div class="time_container">
+		<div>
+			<div>
+				<div >
+					<div>
+						<h1>電影場次</h1>
+						<div class="tab">
+							{% for cinema in cinemas %}
+							<button class="tablinks" onclick="openCity(event, '{{ cinema[0] }}')">{{ cinema[0] }}</button>
+							{% endfor %}
+						</div>
+						{% for cinema in cinemas %}
+						{% if cinema == cinemas[0] %}
+						<div id="{{ cinema[0] }}" class="tabcontent" style="display: block;">
+						{% else %}
+						<div id="{{ cinema[0] }}" class="tabcontent">
+						{% endif %}
+							{% for date in dates %}
+							<table>
+								<thead>
+									<h3>{{ date[0] }}</h3>
+								</thead>
+								<tbody>
+									{% for version in versions %}
+									{% if sessions[cinema][date][version] %}
+									<tr>
+										<td>
+											<a>{{ version[0] }}</a>
+										</td>
+									</tr>
+									<tr>
+										{% for time in sessions[cinema][date][version] %}
+										<td>
+											<div>
+												<a href="order3.html">{{ time[0] }}</a>
+												<a href="seat.html"  target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
+											</div>
+										</td>
+										{% endfor %}
+									</tr>
+									{% endif %}
+									{% endfor %}
+								</tbody>
+							</table>
+							{% endfor %}
+						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
@@ -93,4 +183,21 @@
 
 {% block script %}
 	{{ super() }}
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		function openCity(evt, cityName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(cityName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+	</script>
 {% endblock script %}

@@ -42,42 +42,46 @@
 			<div>
 				<div>
 					<table>
+						{% for movie_pair in movies %}
 						<tr>
 							<td>
 								<div class="movieitem">
 									<figure class="movieitem_img">
-										<a href="/movieintro">
+										<a href="/movieintro?name={{ movie_pair[0][0] }}">
 											<img src="{{ url_for('static', filename = 'images/R.jpg') }}" alt="">
 										</a>
 									</figure>
 									<div class="movieiteminfo">
 										<h2>
-											<a href="/movieintro">阿凡達：水之道</a>
+											<a href="/movieintro?name={{ movie_pair[0][0] }}">{{ movie_pair[0][0] }}</a>
 										</h2>
 										<h3>
-											<a>AVATAR THE WAY OF WATER</a>
+											<a href="/movieintro?name={{ movie_pair[0][0] }}">AVATAR THE WAY OF WATER</a>
 										</h3>
 									</div>
 								</div>
 							</td>
+							{% if movie_pair[1] %}
 							<td>
 								<div class="movieitem">
 									<figure class="movieitem_img">
-										<a href="/movieintro">
+										<a href="/movieintro?name={{ movie_pair[1][0] }}">
 											<img src="{{ url_for('static', filename = 'images/R.jpg') }}" alt="">
 										</a>
 									</figure>
 									<div class="movieiteminfo">
 										<h2>
-											<a href="/movieintro">阿凡達：水之道</a>
+											<a href="/movieintro?name={{ movie_pair[1][0] }}">{{ movie_pair[1][0] }}</a>
 										</h2>
 										<h3>
-											<a>AVATAR THE WAY OF WATER</a>
+											<a href="/movieintro?name={{ movie_pair[1][0] }}">AVATAR THE WAY OF WATER</a>
 										</h3>
 									</div>
 								</div>
 							</td>
+							{% endif %}
 						</tr>
+						{% endfor %}
 					</table>
 				</div>
 			</div>

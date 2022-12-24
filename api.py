@@ -1,12 +1,23 @@
 import pymysql
+
 db = pymysql.connect(
     host='localhost', 
     port=3306, 
-    user='root', 
-    passwd='0000', 
-    db='db', 
-    charset='utf8'
+    user='jeffrey', 
+    passwd='', 
+    db='VIESHOW'
 )
+
+def get_all_movies(db = db):
+    with db.cursor() as cursor:
+        command = "SELECT `movie_name` FROM `movie_info` WHERE 1;"
+        try:
+            cursor.execute(command)
+            result = cursor.fetchall()
+        except:
+            db.rollback()
+    return result
+
 def get_movie_info(title: str, /, db = db) -> dict:
     
     with db.cursor() as cursor:
@@ -80,6 +91,16 @@ def get_movie_info(title: str, /, db = db) -> dict:
         cursor.close()
     return movie_info
 
+def get_all_studios(db = db):
+    with db.cursor() as cursor:
+        command = "SELECT `Cinema_name`, `Cinema_address`, `Cinema_tel` FROM `cinema_information` WHERE 1;"
+        try:
+            cursor.execute(command)
+            result = cursor.fetchall()
+        except:
+            db.rollback()
+    return result
+
 def get_studio_info(studio_name: str, /, db = db) -> dict:
     
     with db.cursor() as cursor:
@@ -124,20 +145,20 @@ def get_studio_info(studio_name: str, /, db = db) -> dict:
         cursor.close()
     return studio_info
 
-def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /, db = db) -> list[dict]:
-    
+def get_sessions(studio_name = None, movie_title = None, date = None, time = None, db = db) -> list[dict]:
+
     with db.cursor() as cursor:
         sessions_info= {}
-        command= "SELECT `movie_cinema` FROM movie  WHERE 1"
+        command= "SELECT `movie_cinema` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "
-        try:    
+            command += f'AND movie_time = "{time}" '
+        try:
             cursor.execute(command)
             result = cursor.fetchall()
         except:
@@ -145,32 +166,32 @@ def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /
         sessions_info['movie_cinema'] = result
 
 
-        command= "SELECT `movie_name` FROM movie  WHERE 1"
+        command= "SELECT `movie_name`, `movie_limit_stage` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "
+            command += f'AND movie_time = "{time}" '
         try:     
             cursor.execute(command )
             result = cursor.fetchall()
         except:
             db.rollback()
-        sessions_info['movie_name'] = result
+        sessions_info['movie_info'] = result
 
 
-        command= "SELECT `movie_date` FROM movie  WHERE 1"
+        command= "SELECT `movie_date` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "        
+            command += f'AND movie_time = "{time}" '
         try:
             cursor.execute(command)
             result = cursor.fetchall()
@@ -179,21 +200,37 @@ def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /
         sessions_info['movie_date'] = result
         
 
-        command= "SELECT `movie_time` FROM movie  WHERE 1"
+        command= "SELECT `movie_time` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "        
+            command += f'AND movie_time = "{time}" '
         try:
             cursor.execute(command)
             result = cursor.fetchall()
         except:
             db.rollback()
         sessions_info['movie_time'] = result
+
+        command= "SELECT `movie_version` FROM movie WHERE 1 "
+        if studio_name is not None:
+            command += f'AND movie_cinema = "{studio_name}" '
+        if movie_title is not None:
+            command += f'AND movie_name = "{movie_title}" '
+        if date is not None:
+            command += f'AND movie_date = "{date}" '
+        if time is not None:
+            command += f'AND movie_time = "{time}" '
+        try:
+            cursor.execute(command)
+            result = cursor.fetchall()
+        except:
+            db.rollback()
+        sessions_info['movie_version'] = result
     
         cursor.close()
 

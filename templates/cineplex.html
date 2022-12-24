@@ -5,6 +5,54 @@
     {{ super() }}
 {% endblock navigation %}
 
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+	<style>
+		.tab {
+		  overflow: hidden;
+		  border: 1px  #ccc;
+		  background-color: #020d18;
+		}
+			.tab button {
+		  background-color: inherit;
+		  float: left;
+		  border: none;
+		  outline: none;
+		  cursor: pointer;
+		  padding: 14px 16px;
+		  transition: 0.3s;
+		  font-size: 17px;
+		}
+		
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+		  background-color: #abb7c4;
+		}
+		
+		/* Create an active/current tablink class */
+		.tab button.active {
+		  background-color: #233a50;
+		}
+		
+		/* Style the tab content */
+		.tabcontent {
+		  display: none;
+		  padding: 6px 12px;
+		  -webkit-animation: fadeEffect 1s;
+		  animation: fadeEffect 1s;
+		}
+		
+		/* Fade in tabs */
+		@-webkit-keyframes fadeEffect {
+		  from {opacity: 0;}
+		  to {opacity: 1;}
+		}
+		#accordion {
+			color: #f1f1f1;
+		}
+	</style>
+{% endblock style %}
+
 {% block content %}
 <div class="img_bar" style="display: block;">
 	<img src="{{ url_for('static', filename = 'images/VScinemas.jpg') }}" >
@@ -13,7 +61,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="hero-ct">
-						<h1>台北信義威秀影城</h1>
+						<h1>{{ info['studio_name'] }}</h1>
 						<h2>Vie Show Cinemas Taipei Hsin Yi</h2>
 					</div>
 				</div>
@@ -23,17 +71,7 @@
 </div>
 <div style="display: block;">
 	<div class="Info">
-		<a>台北信義威秀影城內有時髦前衛、聲光炫麗的裝潢，為全國第一座專門為放映電影而量身打造的建築設計，
-		提供了由現成建築物改裝的傳統電影院無法擁有的舒適視聽空間。</a>
-	</div>
-	<div class="Info">
-		<a>世界上最棒的影廳之一的4DX影廳，威秀影城2013年獨家引進，打造『台北信義威秀影城』全台首座4DX影廳，
-		帶給您世界級的最新影音感官全體驗效果。</a>
-	</div>
-	<div class="Info">
-		<a>為滿足觀眾視聽至高無上的享受，台北信義威秀影城應用最新科技，為未來影城之設計規劃建立新規範，
-		也為台灣的電影院史上樹立新的里程碑。出自名室內設計師之手的17間影廳院，皆具備超大型廣角弧形銀幕及球場座位排列的座椅，
-		提供威秀影城之觀眾寬敞舒適、無障礙的空間，為全台首座經過THX世界標準聲場環境認證的標準影廳，提供北台灣民眾世界級的影音享受。</a>
+		<a>{{ info['studio_intro'][0] }}</a>
 	</div>
 	<div class="Info">
 		<ul >
@@ -57,6 +95,62 @@
 
 	<a></a>
 </div>
+<div class="Info" >
+	<div class="time_container">
+		<div>
+			<div>
+				<div >
+					<div>
+						<h1>場次查詢</h1>
+						<div class="tab">
+							{% for date in dates %}
+							<button class="tablinks" onclick="openCity(event, '{{ date[0] }}')">{{ date[0] }}</button>
+							{% endfor %}
+						</div>
+						{% for date in dates %}
+						{% if date == dates[0] %}
+						<div id="{{ date[0] }}" class="tabcontent" style="display: block;">
+						{% else %}
+						<div id="{{ date[0] }}" class="tabcontent">
+						{% endif %}
+							{% for movie in movies %}
+							<table>
+								<thead>
+									<h3>{{ movie[0] }}</h3>
+									<a>AVATAR THE WAY OF WATER</a>
+								</thead>
+								<tbody>
+									{% for version in versions %}
+									{% if sessions[date][movie][version] %}
+									<tr>
+										<td>
+											<a>{{ version[0] }}</a>
+										</td>
+									</tr>
+									<tr>
+										{% for time in sessions[date][movie][version] %}
+										<td>
+											<div>
+												<a href="order3.html">{{ time[0] }}</a>
+												<a href="book.html" target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
+											</div>
+										</td>
+										{% endfor %}
+									</tr>
+									{% endif %}
+									{% endfor %}
+								</tbody>
+							</table>
+							{% endfor %}
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</diV>
+</div>
 {% endblock content %}
 
 {% block footer %}
@@ -65,4 +159,21 @@
 
 {% block script %}
 	{{ super() }}
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		function openCity(evt, cityName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(cityName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+	</script>
 {% endblock script %}

@@ -1,3 +1,10 @@
+<!--[if IE 7]>
+<html class="ie ie7 no-js" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 no-js" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -46,10 +53,15 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav flex-child-menu menu-right">
-					<li><a href="/theater">影城介紹</a></li>
-					<li><a href="/movies">電影介紹</a></li>
-					<li><a href="member_service.html">會員專區</a></li>
-					<li><a href="login.html">會員登入</a></li>
+					<li><a class="nav-link" href="/theater">影城介紹</a></li>
+					<li><a class="nav-link" href="/movies">電影介紹</a></li>
+					<li><a class="nav-link" href="member_service.html">會員專區</a></li>
+					{% if current_user.is_authenticated %}
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('logout', next=request.url) }}">登出</a></li>
+					{% else %}
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('login', next=request.url) }}">登入</a></li>
+						<li class="nav-item"><a class="nav-link" href="/register">註冊</a></li>
+					{% endif %}
 				</ul>
 			</div>
 		<!-- /.navbar-collapse -->
