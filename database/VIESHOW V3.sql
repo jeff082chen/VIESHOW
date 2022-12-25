@@ -11967,5 +11967,8 @@ ALTER TABLE `rec_ticket`
 
 ALTER TABLE `movie`
   MODIFY `movie_ses` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+ 
+ ALTER TABLE `rec_ticket` 
+  MODIFY `ticket_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
