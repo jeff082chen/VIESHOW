@@ -29,7 +29,7 @@
 								<div class="theateritem">
 									<figure class="theateritem_img">
 										<a href="/cineplex?name={{ theater_pair[0][0] }}">
-											<img src="{{ url_for('static', filename='images/vsimg.png') }}" alt="">
+											<img src="{{ url_for('static', filename=theater_pair[0][4]) }}" alt="">
 										</a>
 									</figure>
 									<div class="theateriteminfo">
@@ -37,7 +37,7 @@
 											<a href="/cineplex?name={{ theater_pair[0][0] }}">{{ theater_pair[0][0] }}</a>
 										</h2>
 										<h3>
-											<a href="/cineplex?name={{ theater_pair[0][0] }}">Vie Show Cinemas Taipei Hsin Yi</a>
+											<a href="/cineplex?name={{ theater_pair[0][0] }}">{{ theater_pair[0][3] }}</a>
 										</h3>
 										<p>影城地址：{{ theater_pair[0][1] }}</p>
 										<p>服務專線：{{ theater_pair[0][2] }}</p>
@@ -49,7 +49,7 @@
 								<div class="theateritem">
 									<figure class="theateritem_img">
 										<a href="/cineplex?name={{ theater_pair[1][0] }}">
-											<img src="{{ url_for('static', filename='images/vsimg.png') }}" alt="">
+											<img src="{{ url_for('static', filename=theater_pair[1][4]) }}" alt="">
 										</a>
 									</figure>
 									<div class="theateriteminfo">
@@ -57,7 +57,7 @@
 											<a href="/cineplex?name={{ theater_pair[1][0] }}">{{ theater_pair[1][0] }}</a>
 										</h2>
 										<h3>
-											<a href="/cineplex?name={{ theater_pair[1][0] }}">Vie Show Cinemas Taipei Hsin Yi</a>
+											<a href="/cineplex?name={{ theater_pair[1][0] }}">{{ theater_pair[1][3] }}</a>
 										</h3>
 										<p>影城地址：{{ theater_pair[1][1] }}</p>
 										<p>服務專線：{{ theater_pair[1][2] }}</p>

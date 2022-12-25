@@ -67,12 +67,12 @@
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="{{ url_for('static', filename = 'images/R.jpg') }}" alt="">
+					<img src="{{ url_for('static', filename = info['movie_poster'][0]) }}" alt="">
 				</div>
 			</div>
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
-					<h1 class="bd-hd">{{ info['movie_name'] }} <br><span>AVATAR THE WAY OF WATER</span></h1>
+					<h1 class="bd-hd">{{ info['movie_name'] }} <br><span>{{ info['movie_englishname'][0] }}</span></h1>
 					<div class="movie-tabs">
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
@@ -88,8 +88,8 @@
 											</div>
 											<div class="mvsingle-item ov-item">
                                                 <div class="vd-it">
-													<img class="vd-img" src="{{ url_for('static', filename = 'images/AVATAR.png') }}" alt="" style="width: 100%;">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/watch?v=V3HNyypVA8U&ab_channel=%E4%BA%8C%E5%8D%81%E4%B8%96%E7%B4%80%E5%BD%B1%E6%A5%AD"><img src="{{ url_for('static', filename = 'images/uploads/play-vd.png') }}" alt=""></a>
+													<img class="vd-img" src="{{ url_for('static', filename = info['movie_poster'][0]) }}" alt="" style="width: 100%;">
+													<a class="fancybox-media hvr-grow" href="{{ info['movie_videos'][0] }}"><img src="{{ url_for('static', filename = 'images/uploads/play-vd.png') }}" alt=""></a>
 												</div>
 											</div>
 						            	</div>
@@ -157,7 +157,7 @@
 										<td>
 											<div>
 												<a href="order3.html">{{ time[0] }}</a>
-												<a href="seat.html"  target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
+												<a href="/seat?ID={{ time[1] }}"  target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
 											</div>
 										</td>
 										{% endfor %}

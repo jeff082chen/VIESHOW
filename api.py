@@ -1,12 +1,23 @@
 import pymysql
+
 db = pymysql.connect(
     host='localhost', 
     port=3306, 
-    user='root', 
-    passwd='0000', 
-    db='db', 
-    charset='utf8'
+    user='jeffrey', 
+    passwd='', 
+    db='VIESHOW'
 )
+
+def get_all_movies(db = db):
+    with db.cursor() as cursor:
+        command = "SELECT `movie_name`,`movie_englishname`, `movie_poster` FROM `movie_info` WHERE 1;"
+        try:
+            cursor.execute(command)
+            result = cursor.fetchall()
+        except:
+            db.rollback()
+    return result
+
 def get_movie_info(title: str, /, db = db) -> dict:
     
     with db.cursor() as cursor:
@@ -104,22 +115,32 @@ def get_movie_info(title: str, /, db = db) -> dict:
         cursor.close()
     return movie_info
 
+def get_all_studios(db = db):
+    with db.cursor() as cursor:
+        command = "SELECT `Cinema_name`, `Cinema_address`, `Cinema_tel`, `Cinema_englishname`, `Cinema_image` FROM `cinema_information` WHERE 1;"
+        try:
+            cursor.execute(command)
+            result = cursor.fetchall()
+        except:
+            db.rollback()
+    return result
+
 def get_studio_info(studio_name: str, /, db = db) -> dict:
     
     with db.cursor() as cursor:
         studio_info = {'studio_name': studio_name}
 
-        command = "SELECT `Cinema_englishname` FROM `movie_info` WHERE `movie_name`= %s;" 
+        command = "SELECT `Cinema_englishname` FROM `cinema_information` WHERE `Cinema_name`= %s;" 
         try:
-            cursor.execute(command , title)
+            cursor.execute(command , studio_name)
             result = cursor.fetchone()
         except:
             db.rollback()
         studio_info ['Cinema_englishname'] = result
 
-        command = "SELECT `Cinema_image` FROM `movie_info` WHERE `movie_name`= %s;" 
+        command = "SELECT `Cinema_image` FROM `cinema_information` WHERE `Cinema_name`= %s;" 
         try:
-            cursor.execute(command , title)
+            cursor.execute(command , studio_name)
             result = cursor.fetchone()
         except:
             db.rollback()
@@ -164,20 +185,31 @@ def get_studio_info(studio_name: str, /, db = db) -> dict:
         cursor.close()
     return studio_info
 
-def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /, db = db) -> list[dict]:
-    
+def get_session_info(ID: int, /, db = db):
+
+    with db.cursor() as cursor:
+        command = f"SELECT * FROM movie WHERE movie_ses = {ID}"
+        try:
+            cursor.execute(command)
+            result = cursor.fetchone()
+        except:
+            db.rollback()
+    return result
+
+def get_sessions(studio_name = None, movie_title = None, date = None, time = None, db = db) -> list[dict]:
+
     with db.cursor() as cursor:
         sessions_info= {}
-        command= "SELECT `movie_cinema` FROM movie  WHERE 1"
+        command= "SELECT `movie_cinema` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "
-        try:    
+            command += f'AND movie_time = "{time}" '
+        try:
             cursor.execute(command)
             result = cursor.fetchall()
         except:
@@ -185,32 +217,32 @@ def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /
         sessions_info['movie_cinema'] = result
 
 
-        command= "SELECT `movie_name` FROM movie  WHERE 1"
+        command= "SELECT `movie_name`, `movie_limit_stage` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "
+            command += f'AND movie_time = "{time}" '
         try:     
             cursor.execute(command )
             result = cursor.fetchall()
         except:
             db.rollback()
-        sessions_info['movie_name'] = result
+        sessions_info['movie_info'] = result
 
 
-        command= "SELECT `movie_date` FROM movie  WHERE 1"
+        command= "SELECT `movie_date` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "        
+            command += f'AND movie_time = "{time}" '
         try:
             cursor.execute(command)
             result = cursor.fetchall()
@@ -219,21 +251,37 @@ def get_sessions(studio_name: str , movie_title: str , date: str , time: str , /
         sessions_info['movie_date'] = result
         
 
-        command= "SELECT `movie_time` FROM movie  WHERE 1"
+        command= "SELECT `movie_time`, `movie_ses` FROM movie WHERE 1 "
         if studio_name is not None:
-            command += "AND movie_cinema = '{studio_name}' "
+            command += f'AND movie_cinema = "{studio_name}" '
         if movie_title is not None:
-            command += "AND movie_name = '{movie_title}' "
+            command += f'AND movie_name = "{movie_title}" '
         if date is not None:
-            command += "AND movie_date = '{date}' "
+            command += f'AND movie_date = "{date}" '
         if time is not None:
-            command += "AND movie_time = '{time}' "        
+            command += f'AND movie_time = "{time}" '
         try:
             cursor.execute(command)
             result = cursor.fetchall()
         except:
             db.rollback()
         sessions_info['movie_time'] = result
+
+        command= "SELECT `movie_version` FROM movie WHERE 1 "
+        if studio_name is not None:
+            command += f'AND movie_cinema = "{studio_name}" '
+        if movie_title is not None:
+            command += f'AND movie_name = "{movie_title}" '
+        if date is not None:
+            command += f'AND movie_date = "{date}" '
+        if time is not None:
+            command += f'AND movie_time = "{time}" '
+        try:
+            cursor.execute(command)
+            result = cursor.fetchall()
+        except:
+            db.rollback()
+        sessions_info['movie_version'] = result
     
         cursor.close()
 
@@ -244,7 +292,35 @@ def create_new_member(account: str, password: str,mem_name:str, mem_email: str, 
     with db.cursor() as cursor:
         
         try:
-            command = "INSERT INTO `member`(`account`, `password`, `mem_name`, `mem_email`, `mem_phone`, `mem_birthday`, `mem_point`, `mem_creditcardnum`, `mem_veri`, `veri_pass`) VALUES  ('{account}','{password}'.'{mem_name}','{mem_email}','{mem_phone}','{mem_birthday}','0','{mem_veri}','0');" 
+            command = f'INSERT INTO `member` (`account`, `password`, `mem_name`, `mem_email`, `mem_phone`, `mem_birthday`, `mem_point`, `mem_creditcardnum`, `mem_veri`, `veri_pass`) VALUES ("{account}","{password}","{mem_name}","{mem_email}","{mem_phone}","{mem_birthday}","0","{mem_creditcard_num}","{mem_veri}","0");'
+            cursor.execute(command)
+            db.commit()
+        except:
+            db.rollback()
+            return False
+
+        cursor.close()
+
+    return True
+
+def member_is_valid(account: str, /, db = db) -> bool:
+
+    with db.cursor() as cursor:
+        try:
+            command = f'SELECT `veri_pass` FROM member WHERE account = "{account}"'
+            cursor.execute(command)
+            result = cursor.fetchone()
+        except:
+           db.rollback()
+
+        cursor.close()
+    return result
+
+def verify_member(account: str, /, db = db):
+
+    with db.cursor() as cursor:
+        try:
+            command = f'UPDATE member SET `veri_pass` = 1 WHERE account = "{account}"'
             cursor.execute(command)
             db.commit()
         except:
@@ -252,13 +328,24 @@ def create_new_member(account: str, password: str,mem_name:str, mem_email: str, 
 
         cursor.close()
 
-    return True
-
 def get_member_password(account: str, /, db = db) -> str:
     
     with db.cursor() as cursor:
         try:
-            command = "SELECT `password` FROM `member` WHERE account ='{account}'" 
+            command = f"SELECT `password` FROM `member` WHERE account ='{account}'" 
+            cursor.execute(command)
+            result = cursor.fetchone()
+        except:
+           db.rollback()
+
+        cursor.close()
+    return result
+
+def get_member_verification_code(account: str, /, db = db) -> str:
+    
+    with db.cursor() as cursor:
+        try:
+            command = f"SELECT `mem_veri` FROM `member` WHERE account ='{account}'" 
             cursor.execute(command)
             result = cursor.fetchone()
         except:

@@ -55,14 +55,14 @@
 
 {% block content %}
 <div class="img_bar" style="display: block;">
-	<img src="{{ url_for('static', filename = 'images/VScinemas.jpg') }}" >
+	<img src="{{ url_for('static', filename = info['Cinema_image'][0]) }}" >
 	<div class="hero user-hero">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="hero-ct">
 						<h1>{{ info['studio_name'] }}</h1>
-						<h2>Vie Show Cinemas Taipei Hsin Yi</h2>
+						<h1>{{ info['Cinema_englishname'][0] }}</h1>
 					</div>
 				</div>
 			</div>
@@ -132,7 +132,7 @@
 										<td>
 											<div>
 												<a href="order3.html">{{ time[0] }}</a>
-												<a href="book.html" target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
+												<a href="/seat?ID={{ time[1] }}" target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
 											</div>
 										</td>
 										{% endfor %}

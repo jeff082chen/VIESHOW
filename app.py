@@ -74,6 +74,19 @@ def index():
     # to be done: dependent drop down
     return render_template('index.html')
 
+@app.route('/search')
+def search():
+    return render_template('search.html')
+
+@app.route('/seat')
+def seat():
+    ID = request.args.get('ID')
+    info = api.get_session_info(ID, db = get_db())
+    empty_seats = api.get_empty_seats(ID, db = get_db())
+    rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    columns = [str(col) for col in range(1, 11)]
+    return render_template('seat.html', info = info, empty_seats = empty_seats, rows = rows, columns = columns)
+
 @app.route('/theater')
 def theater():
     theaters = list(api.get_all_studios(db = get_db()))

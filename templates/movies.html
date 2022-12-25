@@ -48,7 +48,7 @@
 								<div class="movieitem">
 									<figure class="movieitem_img">
 										<a href="/movieintro?name={{ movie_pair[0][0] }}">
-											<img src="{{ url_for('static', filename = 'images/R.jpg') }}" alt="">
+											<img src="{{ url_for('static', filename = movie_pair[0][2]) }}" alt="">
 										</a>
 									</figure>
 									<div class="movieiteminfo">
@@ -56,7 +56,7 @@
 											<a href="/movieintro?name={{ movie_pair[0][0] }}">{{ movie_pair[0][0] }}</a>
 										</h2>
 										<h3>
-											<a href="/movieintro?name={{ movie_pair[0][0] }}">AVATAR THE WAY OF WATER</a>
+											<a href="/movieintro?name={{ movie_pair[0][0] }}">{{ movie_pair[0][1] }}</a>
 										</h3>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 								<div class="movieitem">
 									<figure class="movieitem_img">
 										<a href="/movieintro?name={{ movie_pair[1][0] }}">
-											<img src="{{ url_for('static', filename = 'images/R.jpg') }}" alt="">
+											<img src="{{ url_for('static', filename = movie_pair[1][2]) }}" alt="">
 										</a>
 									</figure>
 									<div class="movieiteminfo">
@@ -74,7 +74,7 @@
 											<a href="/movieintro?name={{ movie_pair[1][0] }}">{{ movie_pair[1][0] }}</a>
 										</h2>
 										<h3>
-											<a href="/movieintro?name={{ movie_pair[1][0] }}">AVATAR THE WAY OF WATER</a>
+											<a href="/movieintro?name={{ movie_pair[1][0] }}">{{ movie_pair[1][1] }}</a>
 										</h3>
 									</div>
 								</div>
