@@ -156,8 +156,10 @@
 										{% for time in sessions[cinema][date][version] %}
 										<td>
 											<div>
-												<a href="order3.html">{{ time[0] }}</a>
-												<a href="/seat?ID={{ time[1] }}"  target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
+												<form action="/order3" method="post">
+													<button type="submit" name="session_id" value="{{ time[1] }}" class="btn-link">{{ time[0] }}</button>
+												</form>
+												<a href="/seat?ID={{ time[1] }}"  target="_blank"><img src="{{ url_for('static', filename = 'images/seat.png') }}"></a>
 											</div>
 										</td>
 										{% endfor %}

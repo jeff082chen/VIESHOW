@@ -1,92 +1,36 @@
-<!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
-<html lang="en" class="no-js">
+<!-- templates/index.html -->
+{% extends "base.html" %}
 
-<!-- userprofile14:04-->
-<head>
-	<!-- Basic need -->
-	<title>Open Pediatrics</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-	<link rel="profile" href="#">
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+{% endblock style %}
 
-    <!--Google Font-->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600" />
-	<!-- Mobile specific meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone-no">
-
-	<!-- CSS files -->
-	<link rel="stylesheet" href="css/plugins.css">
-	<link rel="stylesheet" href="css/style.css">
-
-</head>
-<body>
-<!--preloading-->
-<div id="preloader">
-    <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
-    <div id="status">
-        <span></span>
-        <span></span>
-    </div>
-</div>
-<!--end of preloading-->
-	
-<!-- BEGIN | Header -->
-<header class="ht-header">
-	<div class="container">
-		<nav class="navbar navbar-default navbar-custom">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header logo">
-				    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					    <span class="sr-only">Toggle navigation</span>
-					    <div id="nav-icon1">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-				    </div>
-				    <a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
-			    </div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav flex-child-menu menu-left">
-						<li class="hidden">
-							<a href="#page-top"></a>
-						</li>	
-					</ul>
-					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<li><a href="theater.html">影城介紹</a></li>
-						<li><a href="movies.html">電影介紹</a></li>
-						<li><a href="order.html">前往訂票</a></li>
-						<li><a href="ticket_record.html">訂票紀錄</a></li>						
-						<li><a href="member_service.html">會員服務</a></li>   
-						<li><a href="member_service.html">會員服務</a></li>
-					</ul>
-				</div>
-			<!-- /.navbar-collapse -->
-	    </nav>
-	    
-	    <!-- top search form -->
-	    <div class="top-search">
-	    	<select name="" onchange="javascript:location.href=this.value;">
-				<option><strong>請下拉點選您要的服務</strong></option>
-				<option value="profile.html">1. 查詢/修改會員資料</option>
-				<option value="forgetpassward.html">2. 修改網路訂票密碼</option>
-			</select>
-	    </div>
+{% block navigation %}
+	<!--preloading-->
+	<div id="preloader">
+		<img class="logo" src="{{ url_for('static', filename='images/logo1.png') }}" alt="" width="119" height="58">
+		<div id="status">
+			<span></span>
+			<span></span>
+		</div>
 	</div>
-</header>
-<!-- END | Header -->
+	<!--end of preloading-->
+    {{ super() }}
+{% endblock navigation %}
 
+{% block member %}
+<!-- top search form -->
+<div class="top-search">
+	<select name="" onchange="javascript:location.href=this.value;">
+		<option><strong>請下拉點選您要的服務</strong></option>
+		<option value="/profile">1. 查詢/修改會員資料</option>
+		<option value="/forget_password">2. 忘記密碼</option>
+		<option value="/ticket_record">3. 訂票紀錄</option>
+	</select>
+</div>
+{% endblock member %}
+
+{% block content %}
 <div class="hero user-hero">
 	<div class="container">
 		<div class="row">
@@ -106,61 +50,111 @@
 		<div class="row ipad-width">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
-					<form action="#" class="user">
+					<form action="#" class="password">
 						<h4>用戶資料</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>帳號名稱</label>
-								<input type="text" placeholder="Larry">
+								<label>{{ info[2] }}</label>
 							</div>
+							<div class="col-md-6 form-it">
+								<label>點數</label>
+								<label>{{ info[6] }}</label>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>電子信箱</label>
-								<input type="text" placeholder="Larry@gmail.com">
+								<label>{{ info[3] }}</label>
+							</div>
+							<div class="col-md-6 form-it">
+								<label>信用卡號</label>
+								<label>{{ info[7] }}</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
-								<label>您的姓氏</label>
-								<input type="text" placeholder="Lai">
+								<label>生日</label>
+								<label>{{ info[5] }}</label>
 							</div>
-							<div class="col-md-6 form-it">
-								<label>您的名字</label>
-								<input type="text" placeholder="Larry">
-							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>手機號碼</label>
-								<input type="text" placeholder="09XXXXXXXX">
+								<label>{{ info[4] }}</label>
+							</div>
+						</div>
+					</form>
+					<form action="/change_info" class="user" method="post">
+						<h4>修改生日、信箱</h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>生日</label>
+								<input type="date" name="birthday">
 							</div>
 							<div class="col-md-6 form-it">
-								<label>身分證號</label>
-								<input type="text" placeholder="FXXXXXXXXX">
+								<label>手機號碼</label>
+								<input type="text" name="phone">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<input class="submit" type="button" value="變更手機號碼" onclick="javascript:window.location.href='cellphone.html'"/>
+								<button type="submit" class="submit">變更帳號資訊</button>
 							</div>
-						</div>	
+						</div>
 					</form>
-					<form action="#" class="password">
+					<form action="/change_password" class="user" method="post">
 						<h4>修改登入密碼</h4>
 						<div class="row">
 							<div class="col-md-6 form-it">
+								<label>舊密碼</label>
+								<input type="password" name="password" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
 								<label>新密碼</label>
-								<input type="text" placeholder="***************">
+								<input type="password" name="new_password" required>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>再輸入一次</label>
-								<input type="text" placeholder="*************** ">
+								<input type="password" name="password_check" required>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<input class="submit" type="submit" value="修改">
+								<button type="submit" class="submit">修改</button>
+								<div style="color:red;"> {{ password_errorMsg|safe }} </div>
+							</div>
+						</div>	
+					</form>
+					<form action="/change_email" class="user" method="post">
+						<h4>修改信箱</h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>新信箱</label>
+								<input type="email" name="email" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<button type="submit" class="submit">修改</button>
+								<div style="color:red;"> {{ email_errorMsg|safe }} </div>
+							</div>
+						</div>	
+					</form>
+					<form action="/recharge" class="user" method="post">
+						<h4>儲值</h4>
+						<h4>獲取點數等於儲值金額的 110%！</h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>金額</label>
+								<input type="number" min="1" name="point" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<button type="submit" class="submit">確認</button>
 							</div>
 						</div>	
 					</form>
@@ -169,38 +163,12 @@
 		</div>
 	</div>
 </div>
-<!-- footer section-->
-<footer class="ht-footer">
-	<div class="container">
-		<div class="flex-parent-ft">
-			<div class="flex-child-ft item1">
-			</div>
-			<div class="flex-child-ft item2">
-			</div>
-			<div class="flex-child-ft item3">
-			</div>
-			<div class="flex-child-ft item4">
-			</div>
-			<div class="flex-child-ft item5">
-		</div>
-	</div>
-	<div class="ft-copyright">
-		<div class="ft-left">
-			<p>Veishow</p>
-		</div>
-		<div class="backtotop">
-			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
-		</div>
-	</div>
-	</div>
-</footer>
-<!-- end of footer section-->
+{% endblock content %}
 
-<script src="js/jquery.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/plugins2.js"></script>
-<script src="js/custom.js"></script>
-</body>
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}
 
-<!-- userprofile14:04-->
-</html>
+{% block script %}
+	{{ super() }}
+{% endblock script %}

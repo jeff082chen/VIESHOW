@@ -1,0 +1,175 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+	<style>
+		.linkbutton {
+			border:5px solid #020d18;
+		}
+		.linkbutton button {
+			background-color: #233a50;
+			width: 100px;
+			height: 50px;
+		}
+		.linkbutton a{
+			font-size: 20px;
+			color: #f1f1f1;
+		}
+	</style>
+{% endblock style %}
+
+{% block navigation %}
+	<!--preloading-->
+	<div id="preloader">
+		<img class="logo" src="{{ url_for('static', filename='images/logo1.png') }}" alt="" width="119" height="58">
+		<div id="status">
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!--end of preloading-->
+    {{ super() }}
+{% endblock navigation %}
+
+{% block content %}
+<div class="hero user-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1>訂票確認</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single">
+	<form action="/ticket_record" method="post">
+	<input type="hidden" name="large_popcorn" value="{{ meals['large_popcorn'] }}">
+	<input type="hidden" name="medium_popcorn" value="{{ meals['medium_popcorn'] }}">
+	<input type="hidden" name="small_popcorn" value="{{ meals['small_popcorn'] }}">
+	<input type="hidden" name="large_drink" value="{{ meals['large_drink'] }}">
+	<input type="hidden" name="medium_drink" value="{{ meals['medium_drink'] }}">
+	<input type="hidden" name="small_drink" value="{{ meals['small_drink'] }}">
+	<input type="hidden" name="total_price" value="{{ total_price }}">
+	<input type="hidden" name="ticket_type" value="{{ ticket_type }}">
+	<input type="hidden" name="session_id" value="{{ session_id }}">
+	<input type="hidden" name="seats" value="{{ all_seats }}">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<div class="form-style-1 user-pro" >
+					<div class="row">
+						<div class="col-md-6 form-it">
+                            <div id="record_movie_name">
+                                <label>({{ info[7] }}){{ info[1] }}</label><br>
+                                <label>{{ movie_eng_name[0] }}</label>                                
+                            </div>
+						</div>
+						<div class="col-md-6 form-it">
+                            <div id="record_theater">
+                                <label>{{ info[3] }}</label><br>
+                                <label>{{ cinema_eng_name[0] }}</label>                                
+                            </div>
+						</div>
+					</div>
+                    <div class="row">
+						<div class="col-md-6 form-it">
+                            <div id="record_time">
+                                <label>日期 {{ info[5] }}, {{ info[6] }}, {{ info[4] }}</label>                 
+                            </div>
+						</div>
+						<div class="col-md-6 form-it">
+                            <div id="record_booking_number">
+                                <label>{{ ticket_info['name'] }}</label>                              
+                            </div>
+						</div>
+					</div>
+                    <div class="row">
+						<div class="col-md-6 form-it">
+                            <div id="record_seat">
+                                <label>訂票座位 {{ all_seats }}</label><br>
+                                <label>Seat {{ all_seats }}</label>  
+                                <hr>
+                            </div>
+						</div>
+                        <div class="col-md-6 form-it">
+                            <div id="record_meal">
+                                <label>大爆米花 X {{ meals['large_popcorn'] }}</label><br>
+								<label>中爆米花 X {{ meals['medium_popcorn'] }}</label><br>
+								<label>小爆米花 X {{ meals['small_popcorn'] }}</label><br>
+								<label>大飲料 X {{ meals['large_drink'] }}</label><br>
+								<label>中飲料 X {{ meals['medium_drink'] }}</label><br>
+								<label>小飲料 X {{ meals['small_drink'] }}</label>
+                            </div>
+						</div>
+					</div>
+                    <div class="row">
+						<div class="col-md-6 form-it">
+                            <div id="record_amount">
+                                <label>總計金額 NT ${{ total_price }}</label><br>
+                                <label>Amount NT${{ total_price }}</label>
+                            </div>
+						</div>
+                        <div class="col-md-6 form-it">
+                            <div id="record_seat">
+                                <label style="float: left;">使用點數：</label><input name="point" type="number" min="0" max="{{ max_point }}" style="float: left; width: 40%; height: 40%;"><br>
+                                <!-- <label>Seat D10,D09</label>   -->
+                                <hr>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        <div style="display: block; position: relative; width: 25%; margin: -50% 0 0% 80%;">
+			<div class="page-single" >
+				<div class="col-md-91 col-sm-12 col-xs-12">
+					<div class="form-style-1 user-pro" action="#">
+						<form action="#" class="user">
+							<h4>會員專區</h4>
+							<div >
+								<div style="display: block; font-size: 20px;">
+									<a>Hi! </a><a>{{ name[0] }}</a><br>
+								</div>
+							</div>
+							<div class="col-md-61 form-it">
+				    			<label>會員點數：</label>
+								<a>{{ point[0] }}</a>
+							</div>
+							<div class="col-md-61 form-it" style="display: block; float: right;">
+								<label>會員期限:</label>
+								<a>永久會員</a>
+        					</div>
+						</form>
+                    </div>
+				</div>
+			</div>
+		</div>
+        <div style="display: block; position: relative; width: 25%; height: 50%; margin: -25% 0 0% 80%;">
+			<div class="page-single" >
+				<div class="col-md-91 col-sm-12 col-xs-12">
+                    <table class="linkbutton" style="width: 25%;margin: 20% 10% 0 0%;">
+                        <tbody>
+                            <tr>
+                                <td class="linkbutton"><button type="button"><a href="javascript:;" onclick="history.back(-1);">上一步</a></button></td>
+                                <td class="linkbutton"><button type="submit" style="margin: 0 500%; color:#f1f1f1">結帳</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+{% endblock content %}
+
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}
+
+{% block script %}
+	{{ super() }}
+{% endblock script %}

@@ -3,28 +3,6 @@
 
 {% block style %}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
-    <script>
-		$( function() {
-			$( "#accordion" ).accordion({
-			collapsible: true
-		});
-		} );
-	</script>
-	<script>
-		function openCity(evt, cityName) {
-		  var i, tabcontent, tablinks;
-		  tabcontent = document.getElementsByClassName("tabcontent");
-		  for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		  }
-		  tablinks = document.getElementsByClassName("tablinks");
-		  for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
-		  }
-		  document.getElementById(cityName).style.display = "block";
-		  evt.currentTarget.className += " active";
-		}
-	</script>
     <style>
         .seattable{
             background-color: #7c99b6;
@@ -102,11 +80,11 @@
 	<div class="container" >
 		<div>
 			<div>
-				<div style="display: block; margin: 0 auto; width: 50%;">
+				<div style="display: block; margin: 0 auto; width: 50%; position: relative;">
                     <div style="text-align:center; background-color:#7c99b6;">
                         <h1>螢幕位置</h1>
                     </div>
-                    <table style="border-collapse:collapse; width: auto; margin: 0 auto;">
+                    <table style="border-collapse:collapse; width: 100%; margin: 0 auto;">
                         <tbody>
                             {% for row in rows %}
                             <tr class="line{{ row }}">
@@ -142,4 +120,26 @@
 
 {% block script %}
 	{{ super() }}
+    <script>
+		$( function() {
+			$( "#accordion" ).accordion({
+			collapsible: true
+		});
+		} );
+	</script>
+	<script>
+		function openCity(evt, cityName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(cityName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+	</script>
 {% endblock script %}

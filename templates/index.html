@@ -15,50 +15,26 @@
 	</div>
 </div>
 <div class="page-single">
-	<div class="container" style="display: block; width: 50%; float: left;">
+	<div class="container" style="display: block;">
 		<div class="row ipad-width">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
+					<div class="row">
 						<h4>快速訂票</h4>
+						<form action="/order3" method="post">
+						{{ form.hidden_tag() }}
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div class="top-search">
-									<select>
-										<option><strong>請選擇影城</strong></option>
-										<option value="">台北信義威秀影城</option>
-										<option value="">MUVIE CINEMAS台北松仁威秀</option>
-										<option value="">MUVIE CINEMAS台北松仁威秀(MUCROWN)</option>
-										<option value="">台北京站威秀影城</option>
-										<option value="">板橋大遠百威秀影城</option>
-										<option value="">中和環球威秀影城</option>
-										<option value="">林口MITSUI OUTLET PARK威秀影城</option>
-										<option value="">林口MITSUI OUTLET PARK威秀影城(Mappa)</option>
-										<option value="">桃園統領威秀影城</option>
-										<option value="">新竹大遠百威秀影城</option>
-										<option value="">新竹大遠百威秀影城(Gold Class)</option>
-										<option value="">新竹巨城威秀影城</option>
-										<option value="">頭份尚順威秀影城</option>
-										<option value="">台中大遠百威秀影城</option>
-										<option value="">台中Tiger City威秀影城</option>
-										<option value="">台中Tiger City威秀影城(Gold Class)</option>
-										<option value="">台中大魯閣新時代威秀影城</option>
-										<option value="">台南大遠百威秀影城</option>
-										<option value="">台南FOCUS威秀影城</option>
-										<option value="">台南南紡威秀影城</option>
-										<option value="">台南南紡威秀影城(Gold Class)</option>
-										<option value="">高雄大遠百威秀影城</option>
-										<option value="">高雄大遠百威秀影城(Gold Class)</option>
-										<option value="">花蓮新天堂樂園威秀影城</option>
-									</select>
+									{{ form.cinemas(class_="form-control") }}
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div class="top-search">
-									<select>
+									<select class="form-control" id="movies" name="movies">
 										<option><strong>請選擇影片</strong></option>
-										<option value=""></option>
 									</select>
 								</div>
 							</div>
@@ -66,9 +42,8 @@
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div class="top-search">
-									<select>
+									<select class="form-control" id="dates" name="dates">
 										<option><strong>請選擇日期</strong></option>
-										<option value=""></option>
 									</select>
 								</div>
 							</div>
@@ -76,9 +51,8 @@
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div class="top-search">
-									<select>
+									<select class="form-control" id="times" name="session_id">
 										<option><strong>請選擇場次</strong></option>
-										<option value=""></option>
 									</select>
 								</div>
 							</div>
@@ -86,151 +60,12 @@
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div style="display:block; margin: 0 10%; float:left;">
-									<button style="background-color: #233a50; color: #abb7c4;"><a href="order3.html">前往訂票</a></button>
-									<button style="background-color: #233a50; color: #abb7c4;"><a href="seat.html">查看座位</a></button>
+									<button type="submit" style="background-color: #233a50; color: #abb7c4;">前往訂票</button>
+									<button type="button" style="background-color: #233a50; color: #abb7c4;" id="seat"><a target="_blank" href="#">查看座位</a></button>
 								</div>
 							</div>
 						</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container" style="display: block; width: 50%; float: left;">
-		<div class="row ipad-width">
-			<div class="col-md-9 col-sm-12 col-xs-12">
-				<div class="form-style-1 user-pro" action="#">
-						<h4>快搜空位</h4>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<div class="top-search">
-									<select>
-										<option><strong>請選擇地區</strong></option>
-										<option value="">雙北</option>
-										<option value="">桃竹苗</option>
-										<option value="">中部</option>
-										<option value="">南部</option>
-										<option value="">東部</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<div class="top-search">
-									<select>
-										<option><strong>請選擇影片</strong></option>
-										<option value=""></option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<div class="top-search">
-									<select>
-										<option><strong>請選擇日期</strong></option>
-										<option value=""></option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6 form-it">
-								<div class="top-search">
-									<select>
-										<option><strong>幾人</strong></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<div class="top-search">
-									<select>
-										<option><strong>時段(起)</strong></option>
-										<option value="06:00">06:00 AM</option>
-										<option value="07:00">07:00 AM</option>
-										<option value="08:00">08:00 AM</option>
-										<option value="09:00">09:00 AM</option>
-										<option value="10:00">10:00 AM</option>
-										<option value="11:00">11:00 AM</option>
-										<option value="12:00">12:00 PM</option>
-										<option value="13:00">01:00 PM</option>
-										<option value="14:00">02:00 PM</option>
-										<option value="15:00">03:00 PM</option>
-										<option value="16:00">04:00 PM</option>
-										<option value="17:00">05:00 PM</option>
-										<option value="18:00">06:00 PM</option>
-										<option value="19:00">07:00 PM</option>
-										<option value="20:00">08:00 PM</option>
-										<option value="21:00">09:00 PM</option>
-										<option value="22:00">10:00 PM</option>
-										<option value="23:00">11:00 PM</option>
-										<option value="00:00">00:00 AM</option>
-										<option value="01:00">01:00 AM</option>
-										<option value="02:00">02:00 AM</option>
-										<option value="03:00">03:00 AM</option>
-										<option value="04:00">04:00 AM</option>
-										<option value="05:00">05:00 AM</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6 form-it">
-								<div class="top-search">
-									<select>
-										<option><strong>時段(迄)</strong></option>
-										<option value="06:00">06:00 AM</option>
-										<option value="07:00">07:00 AM</option>
-										<option value="08:00">08:00 AM</option>
-										<option value="09:00">09:00 AM</option>
-										<option value="10:00">10:00 AM</option>
-										<option value="11:00">11:00 AM</option>
-										<option value="12:00">12:00 PM</option>
-										<option value="13:00">01:00 PM</option>
-										<option value="14:00">02:00 PM</option>
-										<option value="15:00">03:00 PM</option>
-										<option value="16:00">04:00 PM</option>
-										<option value="17:00">05:00 PM</option>
-										<option value="18:00">06:00 PM</option>
-										<option value="19:00">07:00 PM</option>
-										<option value="20:00">08:00 PM</option>
-										<option value="21:00">09:00 PM</option>
-										<option value="22:00">10:00 PM</option>
-										<option value="23:00">11:00 PM</option>
-										<option value="00:00">00:00 AM</option>
-										<option value="01:00">01:00 AM</option>
-										<option value="02:00">02:00 AM</option>
-										<option value="03:00">03:00 AM</option>
-										<option value="04:00">04:00 AM</option>
-										<option value="05:00">05:00 AM</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<div style="display:block; margin: 0 0 0 10%;">
-									<button style="background-color: #233a50; color: #abb7c4;"><a href="order3.html">前往訂票</a></button>
-								</div>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container" style="display: block;">
-		<div class="row ipad-width" style="width: 20%; display: block;">
-			<div class="col-md-9 col-sm-12 col-xs-12">
-				<div class="form-style-1 user-pro" action="#">
-					<h4>查詢場次</h4>
-					<div class="row">
-						<div style="display:block;">
-							<a href="/search"><img src="{{ url_for('static', filename = 'images/v1030-104.png') }}" style="width:80%"></a>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -245,4 +80,97 @@
 
 {% block script %}
 	{{ super() }}
+	<script>
+        let cinemas = document.getElementById('cinemas');
+        let movies = document.getElementById('movies');
+		let dates = document.getElementById('dates');
+		let times = document.getElementById('times');
+
+        let initial = {{ initial|tojson }}
+
+        value1 = initial[3];
+        fetch('/movie_choice?cinema=' + value1).then(function(response){
+
+            response.json().then(function(data){
+                let optionHTML = '<option><strong>請選擇影片</strong></option>';
+
+				for(let opt of data.movies){
+					optionHTML += '<option value ="'  + opt + '">' + opt + '</option>';
+				}
+
+				movies.innerHTML = optionHTML;
+
+            });
+        });
+
+        cinemas.onchange = function(){
+            value1 = cinemas.value;
+
+            fetch('/movie_choice?cinema=' + value1).then(function(response){
+
+                response.json().then(function(data){
+                    let optionHTML = '<option><strong>請選擇影片</strong></option>';
+
+                    for(let opt of data.movies){
+                        optionHTML += '<option value ="'  + opt + '">' + opt + '</option>';
+                    }
+
+                    movies.innerHTML = optionHTML;
+					dates.innerHTML = '<option><strong>請選擇日期</strong></option>';
+					times.innerHTML = '<option><strong>請選擇場次</strong></option>';
+					let seat = document.getElementById('seat')
+					seat.innerHTML = '<a target="_blank" href="#">查看座位</a>'
+                });
+            });
+        }
+
+		movies.onchange = function(){
+            value1 = cinemas.value;
+			value2 = movies.value;
+
+            fetch('/date_choice?cinema=' + value1 + '&movie=' + value2).then(function(response){
+
+                response.json().then(function(data){
+                    let optionHTML = '<option><strong>請選擇日期</strong></option>';
+
+                    for(let opt of data.dates){
+                        optionHTML += '<option value ="'  + opt + '">' + opt + '</option>';
+                    }
+
+                    dates.innerHTML = optionHTML;
+					times.innerHTML = '<option><strong>請選擇場次</strong></option>';
+					let seat = document.getElementById('seat')
+					seat.innerHTML = '<a target="_blank" href="#">查看座位</a>'
+                });
+            });
+        }
+
+		dates.onchange = function(){
+            value1 = cinemas.value;
+			value2 = movies.value;
+			value3 = dates.value;
+
+            fetch('/time_choice?cinema=' + value1 + '&movie=' + value2 + '&date=' + value3).then(function(response){
+
+                response.json().then(function(data){
+                    let optionHTML = '<option><strong>請選擇場次</strong></option>';
+
+                    for(let opt of data.times){
+                        optionHTML += '<option value ="'  + opt[0] + '">' + opt[1] + '</option>';
+                    }
+
+                    times.innerHTML = optionHTML;
+					let seat = document.getElementById('seat')
+					seat.innerHTML = '<a target="_blank" href="#">查看座位</a>'
+                });
+            });
+        }
+
+		times.onchange = function(){
+			value = times.value
+			let seat = document.getElementById('seat')
+			seat.innerHTML = '<a target="_blank" href=/seat?ID=' + value + '>查看座位</a>'
+		}
+
+	</script>
 {% endblock script %}

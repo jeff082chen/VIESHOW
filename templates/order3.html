@@ -1,67 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<!-- templates/index.html -->
+{% extends "base.html" %}
 
-<head>
-	<!-- Basic need -->
-	<title>Open Pediatrics</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-	<link rel="profile" href="#">
-	<!-- Mobile specific meta -->
-	<meta name=viewport content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone-no">
-	<!-- CSS files 	-->
-	<link rel="stylesheet" href="css/style.css">
-</head>
+{% block navigation %}
+    {{ super() }}
+{% endblock navigation %}
 
-<style>
-
-</style>
-
-<body style="background-color:#020d18;">
-<!-- BEGIN | Header -->
-
-<header class="ht-header">
-    <div class="container">
-        <nav class="navbar navbar-default navbar-custom">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header logo">
-                <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <div id="nav-icon1">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-                <a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav flex-child-menu menu-left">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav flex-child-menu menu-right">
-                    <li><a href="theater.html">影城介紹</a></li>
-                    <li><a href="movies.html">電影介紹</a></li>
-                    <li><a href="order.html">前往訂票</a></li>
-                    <li><a href="ticket_record.html">訂票紀錄</a></li>						
-                    <li><a href="member_service.html">會員服務</a></li>
-                    <li><a href="index.html">會員登出</a></li>
-                </ul>
-            </div>
-            
-        <!-- /.navbar-collapse -->
-        </nav>
-    <!-- top search form -->
-    </div>
-    
-</header>
-
+{% block content %}
 <div class="hero user-hero" >
     <div class="container">
         <div class="row">
@@ -75,36 +19,39 @@
         </div>
     </div>
 </div>
-<diV style="display: block;">
+<div style="display: block;">
     <div class="container">
         <div>
             <table id="pay_choice">
                 <tr>
                     <td>
-                        <a href="order4.html" style="outline: none; color: #333; ">
-                            <h1>線上即時付款</h1>
-                            <h2>一般 / 銀行優惠 / iShow會員票種</h2>
-                            <h2>GENERAL / BANK PRIVILEGE TICKET / iShow SVC DISCOUNT TICKET</h2>
-                        </a>
+                        <form action="/book" method="post">
+                            <input type="hidden" name="session_id" value="{{ session_id }}">
+                            <input type="hidden" name="ticket_type" value="general">
+                            <button type="submit" style="width:500px;height:100px;background-color:grey;color:#333;text-align: center;">
+                                <h1>一般票卷</h1><br><h1>GENERAL TICKET</h1>
+                            </button>
+                        </form>
                     </td>
                     <td>
-                        <a href="order4.html" style="outline: none; color: #333;">
-                            <h1>影城臨櫃付款</h1>
-                            <h2>團體優待票券 / 愛心票 / 敬老票 / 免費兌換券</h2>
-                            <h2>CORPORATE MOVIE MONEY / DISABILITY TICKET / ELDERLY TICKET / READMISSION</h2>
-                        </a>
+                        <form action="/book" method="post">
+                            <input type="hidden" name="session_id" value="{{ session_id }}">
+                            <input type="hidden" name="ticket_type" value="offer">
+                            <button type="submit" style="width:500px;height:100px;background-color:grey;color:#333;text-align: center;">
+                                <h1>優待票卷</h1><br><h1>OFFER TICKET</h1>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-</diV>
+</div>
 
-
-<diV style="display: block;">
+<div style="display: block;">
     <div class="container">
         <div>
-            <div  class="ord3_note2">
+            <div class="ord3_note2">
                 <h3>注意事項</h3>
                 <ul>
                     <li>一般電影票種 / 銀行優惠票種將於交易後，立即由您的信用卡帳戶中進行扣款。</li>
@@ -116,31 +63,13 @@
             </div>
         </div>
     </div>
-</diV>
+</div>
+{% endblock content %}
 
-<footer class="ht-footer">
-	<div class="container">
-		<div class="flex-parent-ft">
-			<div class="flex-child-ft item1">
-			</div>
-			<div class="flex-child-ft item2">
-			</div>
-			<div class="flex-child-ft item3">
-			</div>
-			<div class="flex-child-ft item4">
-			</div>
-			<div class="flex-child-ft item5">
-			</div>
-		</div>
-	</div>
-	<div class="ft-copyright">
-		<div class="ft-left">
-			<p><a target="_blank">Veishow</a></p>
-		</div>
-		<div class="backtotop">
-			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
-		</div>
-	</div>
-</footer>
+{% block footer %}
+	{{ super() }}
+{% endblock footer %}
 
-</body>
+{% block script %}
+	{{ super() }}
+{% endblock script %}

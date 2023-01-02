@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files 	-->
+	<!-- <link rel="stylesheet" href="css/1.css"> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script>
+		$( function() {
+			$( "#accordion" ).accordion({
+			collapsible: true
+		});
+		} );
+	</script>
+	<script>
+		function openCity(evt, cityName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(cityName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+	</script>
+    <script >
+        function go(){
+            window.history.go(-1);
+        }setTimeout("go()",3000);
+    </script>
+</head>
+
+<style>
+
+.seattable{
+    border:5px solid #020d18;
+    background-color: #7c99b6;
+    text-align: center;
+    color: #f1f1f1;
+}
+.seattable :active{
+    color: #000;
+}
+#soldout{
+    background-color: red;
+    border:5px solid #020d18;
+    text-align: center;
+}
+#vacancy{
+    background-color: #7c99b6;
+    border:5px solid #020d18;
+    text-align: center;
+}
+#yourchoice{
+    background-color: #233a50;
+    border:5px solid #020d18;
+    text-align: center;
+}
+.linkbutton {
+    border:5px solid #020d18;
+}
+.linkbutton button {
+    background-color: #233a50;
+    width: 100px;
+    height: 50px;
+}
+.linkbutton a{
+    font-size: 20px;
+    color: #f1f1f1;
+}
+</style>
+
+<body style="background-color:#020d18;">
+
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header logo">
+						<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<div id="nav-icon1">
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+						</div>
+						<a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav flex-child-menu menu-left">
+							<li class="hidden">
+								<a href="#page-top"></a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav flex-child-menu menu-right">
+                            <li><a href="theater.html">影城介紹</a></li>
+                            <li><a href="movies.html">電影介紹</a></li>
+                            <li><a href="order.html">前往訂票</a></li>
+                            <li><a href="ticket_record.html">訂票紀錄</a></li>						
+                            <li><a href="member_service.html">會員服務</a></li>
+							<li><a href="member_service.html">會員服務</a></li>
+						</ul>
+					</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+			
+			<!-- top search form -->
+		</div>
+	</header>
+	<!-- END | Header -->
+	<div class="hero user-hero" style="height: auto;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="hero-ct">
+						<div  style="display: block; float: inline-start;">
+							<h1>(數位)阿凡達：水之道</h1>
+							<h2>(DIG)AVATAR THE WAY OF WATER</h2>
+						</div>
+						<div style="display: block; float: right; color: #ddd; ">
+							<ul>
+								<li>2022/12/19 19:00</li>
+								<li>台北信義威秀影城</li>
+								<li>第10廳</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<diV >
+	<div class="container" >
+		<div>
+			<div>
+
+				<div style="display: block; margin: 0 auto; width: 50%; position: relative;">
+                    <div  style="text-align:center; background-color:#7c99b6;">
+                        <h1>螢幕位置</h1>
+                    </div>
+                    <table style="border-collapse:collapse; width: 100%; margin: 0 auto;">
+                        <tbody  >
+                            <tr class="lineA">
+                                <td id="a01" class="seattable">A01</td>
+                                <td id="a02" class="seattable">A02</td>
+                                <td id="a03" class="seattable">A03</td>
+                                <td id="a04" class="seattable">A04</td>
+                                <td id="a05" class="seattable">A05</td>
+                                <td id="a06" class="seattable">A06</td>
+                                <td id="a07" class="seattable">A07</td>
+                                <td id="a08" class="seattable">A08</td>
+                                <td id="a09" class="seattable">A09</td>
+                                <td id="a10" class="seattable">A10</td>      
+                            </tr>
+                            <tr class="lineB">
+                                <td id="b01" class="seattable">B01</td>
+                                <td id="b02" class="seattable">B02</td>
+                                <td id="b03" class="seattable">B03</td>
+                                <td id="b04" class="seattable">B04</td>
+                                <td id="b05" class="seattable">B05</td>
+                                <td id="b06" class="seattable">B06</td>
+                                <td id="b07" class="seattable">B07</td>
+                                <td id="b08" class="seattable">B08</td>
+                                <td id="b09" class="seattable">B09</td>
+                                <td id="b10" class="seattable">B10</td>
+                            </tr>
+                            <tr class="lineC">
+                                <td id="c01" class="seattable">C01</td>
+                                <td id="c02" class="seattable">C02</td>
+                                <td id="c03" class="seattable">C03</td>
+                                <td id="c04" class="seattable">C04</td>
+                                <td id="c05" class="seattable">C05</td>
+                                <td id="c06" class="seattable">C06</td>
+                                <td id="c07" class="seattable">C07</td>
+                                <td id="c08" class="seattable">C08</td>
+                                <td id="c09" class="seattable">C09</td>
+                                <td id="c10" class="seattable">C10</td>
+                            </tr>
+                            <tr class="lineD">
+                                <td id="d01" class="seattable">D01</td>
+                                <td id="d02" class="seattable">D02</td>
+                                <td id="d03" class="seattable">D03</td>
+                                <td id="d04" class="seattable">D04</td>
+                                <td id="d05" class="seattable">D05</td>
+                                <td id="d06" class="seattable">D06</td>
+                                <td id="d07" class="seattable">D07</td>
+                                <td id="d08" class="seattable">D08</td>
+                                <td id="d09" class="seattable">D09</td>
+                                <td id="d10" class="seattable">D10</td>
+                            </tr>
+                            <tr class="lineE">
+                                <td id="e01" class="seattable">E01</td>
+                                <td id="e02" class="seattable">E02</td>
+                                <td id="e03" class="seattable">E03</td>
+                                <td id="e04" class="seattable">E04</td>
+                                <td id="e05" class="seattable">E05</td>
+                                <td id="e06" class="seattable">E06</td>
+                                <td id="e07" class="seattable">E07</td>
+                                <td id="e08" class="seattable"> E08</td>
+                                <td id="e09" class="seattable">E09</td>
+                                <td id="e10" class="seattable">E10</td>
+                            </tr>
+                            <tr class="lineF">
+                                <td id="f01" class="seattable">F01</td>
+                                <td id="f02" class="seattable">F02</td>
+                                <td id="f03" class="seattable">F03</td>
+                                <td id="f04" class="seattable">F04</td>
+                                <td id="f05" class="seattable">F05</td>
+                                <td id="f06" class="seattable">F06</td>
+                                <td id="f07" class="seattable">F07</td>
+                                <td id="f08" class="seattable">F08</td>
+                                <td id="f09" class="seattable">F09</td>
+                                <td id="f10" class="seattable">F10</td>
+                            </tr>
+                            <tr class="lineG">
+                                <td id="g01" class="seattable">G01</td>
+                                <td id="g02" class="seattable">G02</td>
+                                <td id="g03" class="seattable">G03</td>
+                                <td id="g04" class="seattable">G04</td>
+                                <td id="g05" class="seattable">G05</td>
+                                <td id="g06" class="seattable">G06</td>
+                                <td id="g07" class="seattable">G07</td>
+                                <td id="g08" class="seattable">G08</td>
+                                <td id="g09" class="seattable">G09</td>
+                                <td id="g10" class="seattable">G10</td>
+                            </tr>
+                            <tr class="lineH">
+                                <td id="h01" class="seattable">H01</td>
+                                <td id="h02" class="seattable">H02</td>
+                                <td id="h03" class="seattable">H03</td>
+                                <td id="h04" class="seattable">H04</td>
+                                <td id="h05" class="seattable">H05</td>
+                                <td id="h06" class="seattable">H06</td>
+                                <td id="h07" class="seattable">H07</td>
+                                <td id="h08" class="seattable">H08</td>
+                                <td id="h09" class="seattable">H09</td>
+                                <td id="h10" class="seattable">H10</td>
+                            </tr>
+                            <tr class="lineI">
+                                <td id="i01" class="seattable">I01</td>
+                                <td id="i02" class="seattable">I02</td>
+                                <td id="i03" class="seattable">I03</td>
+                                <td id="i04" class="seattable">I04</td>
+                                <td id="i05" class="seattable">I05</td>
+                                <td id="i06" class="seattable">I06</td>
+                                <td id="i07" class="seattable">I07</td>
+                                <td id="i08" class="seattable">I08</td>
+                                <td id="i09" class="seattable">I09</td>
+                                <td id="i10" class="seattable">I10</td>
+                            </tr>
+                            <tr class="lineJ">
+                                <td id="j01" class="seattable">J01</td>
+                                <td id="j02" class="seattable">J02</td>
+                                <td id="j03" class="seattable">J03</td>
+                                <td id="j04" class="seattable">J04</td>
+                                <td id="j05" class="seattable">J05</td>
+                                <td id="j06" class="seattable">J06</td>
+                                <td id="j07" class="seattable">J07</td>
+                                <td id="j08" class="seattable">J08</td>
+                                <td id="j09" class="seattable">J09</td>
+                                <td id="j10" class="seattable">J10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+                <div style="display: block; position: relative; width: 25%; margin: -35% 0 36% 80%;">
+                    <div>
+                        <select name="" onchange="javascript:location.href=this.value;" style="background-color: #233a50; color: #f1f1f1; border: none;">
+				            <option><strong>請下拉點選您要的座位</strong></option>
+				            <option value="">A01</option>
+				            <option value="">A02</option>
+			            </select>
+                    </div>
+                </div>
+                <table style="width: 25%; margin: 25px 10% ">
+                    <tbody>
+                        <tr style="color: #f1f1f1;">
+                            <td id="soldout">售出</td>
+                            <td id="vacancy">空位</td>
+                        </tr>
+                    </tbody>
+                </table>
+			</div>
+		</div>
+	</div>
+</diV>
+
+<div style="display: block;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct" style="color: #f1f1f1; display: block;float: right; width: 30%;">
+                    <div>
+                        <a  style="color: #f1f1f1;">優惠單人套票</a>
+                        <span>NT$420 <span>X<span>1<span>張</span></span></span></span><br>
+                        <a  style="color: #f1f1f1;">手續費</a>
+                        <span>NT$40</span>
+                    </diV>
+                    <div style="display: block; float: right; color: #ddd; ">
+                        <span>總計金額 NT$<span>460</span></span>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <table class="linkbutton" style="width: 25%; margin: 0 80% ">
+                        <tbody>
+                            <tr style="color: #f1f1f1;">
+                                <td class="linkbutton"><button><a href="javascript:;" onClick="history.back(-1);">上一步</a></button></td>
+                                <td class="linkbutton"><button ><a href="check_order.html">下一步</a></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="ht-footer">
+	<div class="container">
+		<div class="flex-parent-ft">
+			<div class="flex-child-ft item1">
+			</div>
+			<div class="flex-child-ft item2">
+			</div>
+			<div class="flex-child-ft item3">
+			</div>
+			<div class="flex-child-ft item4">
+			</div>
+			<div class="flex-child-ft item5">
+			</div>
+		</div>
+	</div>
+	<div class="ft-copyright">
+		<div class="ft-left">
+			<p><a target="_blank">Veishow</a></p>
+		</div>
+		<div class="backtotop">
+			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
+		</div>
+	</div>
+</footer>
+
+</body>
+
+

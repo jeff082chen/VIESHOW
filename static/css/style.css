@@ -117,6 +117,7 @@ margin: 0 auto 50px;
   float: left;
   list-style-type: decimal;
 }
+/*
 #pay_choice td{
   background-color: grey;
   width: 600px;
@@ -124,6 +125,7 @@ margin: 0 auto 50px;
   position: relative;
   border:20px  #020d18 solid;
 }
+*/
 #order4_title1{
   display: block;
   margin:10% 0 0 0 ;
@@ -8446,4 +8448,16 @@ footer.full-width-ft .ft-copyright {
   color: #8c9296;
   font-family: 'Dosis', sans-serif;
   font-weight: 700;
+}
+
+.btn-link {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #777;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
 }

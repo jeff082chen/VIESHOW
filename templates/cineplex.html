@@ -13,7 +13,7 @@
 		  border: 1px  #ccc;
 		  background-color: #020d18;
 		}
-			.tab button {
+		.tab button {
 		  background-color: inherit;
 		  float: left;
 		  border: none;
@@ -117,7 +117,7 @@
 							<table>
 								<thead>
 									<h3>{{ movie[0] }}</h3>
-									<a>AVATAR THE WAY OF WATER</a>
+									<a>{{ movie_eng_name[movie[0]] }}</a>
 								</thead>
 								<tbody>
 									{% for version in versions %}
@@ -131,8 +131,10 @@
 										{% for time in sessions[date][movie][version] %}
 										<td>
 											<div>
-												<a href="order3.html">{{ time[0] }}</a>
-												<a href="/seat?ID={{ time[1] }}" target="_blank"><img src="{{ url_for('static', filename = 'images/logo1.png') }}"></a>
+												<form action="/order3" method="post">
+													<button type="submit" name="session_id" value="{{ time[1] }}" class="btn-link">{{ time[0] }}</button>
+												</form>
+												<a href="/seat?ID={{ time[1] }}" target="_blank"><img src="{{ url_for('static', filename = 'images/seat.png') }}"></a>
 											</div>
 										</td>
 										{% endfor %}

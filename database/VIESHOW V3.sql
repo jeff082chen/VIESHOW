@@ -2,7 +2,7 @@ CREATE DATABASE VIESHOW;
 USE VIESHOW;
 
 CREATE TABLE `cinema_information` (
-  `Cinema_name` varchar(45) NOT NULL,
+  `Cinema_name` varchar(45) NOT NULL PRIMARY KEY,
   `Cinema_englishname` varchar(45) NOT NULL,
   `Cinema_image` varchar(50) NOT NULL,
   `Cinema_address` varchar(45) NOT NULL,
@@ -34,7 +34,7 @@ INSERT INTO `cinema_information` (`Cinema_name`, `Cinema_englishname`, `Cinema_i
 
 
 CREATE TABLE `member` (
-  `account` varchar(45) NOT NULL,
+  `account` varchar(45) NOT NULL PRIMARY KEY,
   `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `mem_name` varchar(10) NOT NULL,
   `mem_email` varchar(45) DEFAULT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE `member` (
 
 
 CREATE TABLE `movie` (
-  `movie_ses` int NOT NULL,
+  `movie_ses` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `movie_name` varchar(45) NOT NULL,
   `movie_limit_stage` varchar(45) NOT NULL,
   `movie_cinema` varchar(45) NOT NULL,
@@ -68,10 +68,10 @@ INSERT INTO `movie` (`movie_ses`, `movie_name`, `movie_limit_stage`, `movie_cine
 (5, '捍衛戰士：獨行俠', '保護級', '板橋大遠百威秀影城', '第四廳', '2022/12/26', '10:45', '4DX'),
 (6, '晝盲神探', '輔導級', '中和環球威秀影城', '第二廳', '2022/12/26', '21:15', '數位'),
 (7, '暴戾夜', '輔導級', '台北京站威秀影城', '第三廳', '2022/12/26', '23:15', '數位'),
-(8, '暴戾夜', '輔導級', '板橋大遠百威秀影城', '第四廳', '2022/26', '08:30', '數位'),
+(8, '暴戾夜', '輔導級', '板橋大遠百威秀影城', '第四廳', '2022/12/26', '08:30', '數位'),
 (9, '決戰38度線', '保護級', '台北京站威秀影城', '第一廳', '2022/12/26', '23:15', '數位'),
 (10, '決戰38度線', '保護級', '中和環球威秀影城', '第四廳', '2022/12/26', '10:00', '數位'),
-(11, '決戰38度線 ', '保護級', '板橋大遠百威秀影城', '第四廳', '2022/12/26', '23:15', '數位'),
+(11, '決戰38度線', '保護級', '板橋大遠百威秀影城', '第四廳', '2022/12/26', '23:15', '數位'),
 (12, '角落小夥伴電影版：藍色月夜的魔法之子', '普遍級', '中和環球威秀影城', '第四廳', '2022/12/26', '08:30', '數位'),
 (13, '通往夏天的隧道，再見的出口', '普遍級', '中和環球威秀影城', '第三廳', '2022/12/26', '19:00', '數位'),
 (14, '關於我轉生變成史萊姆這檔事劇場版 紅蓮之絆篇', '普遍級', '台北京站威秀影城', '第一廳', '2022/12/26', '18:30', '數位'),
@@ -110,7 +110,7 @@ INSERT INTO `movie` (`movie_ses`, `movie_name`, `movie_limit_stage`, `movie_cine
 (47, '暴戾夜', '輔導級', '板橋大遠百威秀影城', '第四廳', '2022/12/27', '08:30', '數位'),
 (48, '決戰38度線', '保護級', '台北京站威秀影城', '第一廳', '2022/12/27', '23:15', '數位'),
 (49, '決戰38度線', '保護級', '中和環球威秀影城', '第四廳', '2022/12/27', '10:00', '數位'),
-(50, '決戰38度線 ', '保護級', '板橋大遠百威秀影城', '第四廳', '2022/12/27', '23:15', '數位'),
+(50, '決戰38度線', '保護級', '板橋大遠百威秀影城', '第四廳', '2022/12/27', '23:15', '數位'),
 (51, '角落小夥伴電影版：藍色月夜的魔法之子', '普遍級', '中和環球威秀影城', '第四廳', '2022/12/27', '08:30', '數位'),
 (52, '通往夏天的隧道，再見的出口', '普遍級', '中和環球威秀影城', '第三廳', '2022/12/27', '19:00', '數位'),
 (53, '關於我轉生變成史萊姆這檔事劇場版 紅蓮之絆篇', '普遍級', '台北京站威秀影城', '第一廳', '2022/12/27', '18:30', '數位'),
@@ -149,7 +149,7 @@ INSERT INTO `movie` (`movie_ses`, `movie_name`, `movie_limit_stage`, `movie_cine
 (86, '暴戾夜', '輔導級', '板橋大遠百威秀影城', '第四廳', '2022/12/28', '08:30', '數位'),
 (87, '決戰38度線', '保護級', '台北京站威秀影城', '第一廳', '2022/12/28', '23:15', '數位'),
 (88, '決戰38度線', '保護級', '中和環球威秀影城', '第四廳', '2022/12/28', '10:00', '數位'),
-(89, '決戰38度線 ', '保護級', '板橋大遠百威秀影城', '第四廳', '2022/12/28', '23:15', '數位'),
+(89, '決戰38度線', '保護級', '板橋大遠百威秀影城', '第四廳', '2022/12/28', '23:15', '數位'),
 (90, '角落小夥伴電影版：藍色月夜的魔法之子', '普遍級', '中和環球威秀影城', '第四廳', '2022/12/28', '08:30', '數位'),
 (91, '通往夏天的隧道，再見的出口', '普遍級', '中和環球威秀影城', '第三廳', '2022/12/28', '19:00', '數位'),
 (92, '關於我轉生變成史萊姆這檔事劇場版 紅蓮之絆篇', '普遍級', '台北京站威秀影城', '第一廳', '2022/12/28', '18:30', '數位'),
@@ -182,7 +182,7 @@ INSERT INTO `movie` (`movie_ses`, `movie_name`, `movie_limit_stage`, `movie_cine
 
 
 CREATE TABLE `movie_info` (
-  `movie_name` varchar(45) NOT NULL,
+  `movie_name` varchar(45) NOT NULL PRIMARY KEY,
   `movie_englishname` varchar(100) NOT NULL,
   `movie_videos` varchar(100) NOT NULL,
   `movie_poster` varchar(50) NOT NULL,
@@ -223,18 +223,18 @@ CREATE TABLE `rec_seat` (
 
 
 CREATE TABLE `rec_ticket` (
-  `account` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `ticket_id` int NOT NULL,
+  `account` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ticket_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `movie_ses` int NOT NULL,
-  `ticket_type` int DEFAULT NULL,
-  `type_price` int DEFAULT NULL,
+  `ticket_type` int NOT NULL,
+  `type_price` int NOT NULL,
   `mem_point` int NOT NULL,
-  `large_popcorn` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `medium_popcorn` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `small_popcorn` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `large_drink` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `medium_drink` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `small_drink` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `large_popcorn` int NOT NULL,
+  `medium_popcorn` int NOT NULL,
+  `small_popcorn` int NOT NULL,
+  `large_drink` int NOT NULL,
+  `medium_drink` int NOT NULL,
+  `small_drink` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -242,7 +242,8 @@ CREATE TABLE `rec_ticket` (
 CREATE TABLE `seat` (
   `movie_ses` int NOT NULL,
   `seat` varchar(10) NOT NULL,
-  `seat_bool` tinyint(1) NOT NULL
+  `seat_bool` tinyint(1) NOT NULL,
+  PRIMARY KEY (movie_ses, seat)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -11952,23 +11953,5 @@ INSERT INTO `seat` (`movie_ses`, `seat`, `seat_bool`) VALUES
 (117, 'J-9', 0),
 (117, 'J-10', 0);
 
-
-ALTER TABLE `cinema_information`
-  ADD PRIMARY KEY (`Cinema_name`);
-
-ALTER TABLE `movie`
-  ADD PRIMARY KEY (`movie_ses`);
-
-ALTER TABLE `movie_info`
-  ADD PRIMARY KEY (`movie_name`);
-
-ALTER TABLE `rec_ticket`
-  ADD PRIMARY KEY (`ticket_id`);
-
-ALTER TABLE `movie`
-  MODIFY `movie_ses` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
- 
- ALTER TABLE `rec_ticket` 
-  MODIFY `ticket_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 

@@ -55,7 +55,7 @@
 				<ul class="nav navbar-nav flex-child-menu menu-right">
 					<li><a class="nav-link" href="/theater">影城介紹</a></li>
 					<li><a class="nav-link" href="/movies">電影介紹</a></li>
-					<li><a class="nav-link" href="member_service.html">會員專區</a></li>
+					<li><a class="nav-link" href="/member_service">會員專區</a></li>
 					{% if current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="{{ url_for('logout', next=request.url) }}">登出</a></li>
 					{% else %}
@@ -66,6 +66,7 @@
 			</div>
 		<!-- /.navbar-collapse -->
 		</nav>
+		{% block member %}{% endblock member %}
 	<!-- top search form -->
 	</div>
 </header>
