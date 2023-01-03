@@ -358,7 +358,6 @@ def change_info():
     return redirect(url_for('profile'))
 
 @app.route('/forget_password', methods=['GET', 'POST'])
-@login_required
 def forget_password():
 
     if request.method == 'GET':
