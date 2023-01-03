@@ -363,12 +363,14 @@ def forget_password():
     if request.method == 'GET':
         return render_template('forget_password.html')
 
+    account = request.form.get('account')
+
     random_password = os.urandom(5).hex()
 
     content = MIMEMultipart()  #建立MIMEMultipart物件
     content["subject"] = f"VIESHOW 重置密碼"  #郵件標題
     content["from"] = "VIESHOW0000@gmail.com"  #寄件者
-    content["to"] = current_user.id #收件者
+    content["to"] = account #收件者
     content.attach(MIMEText(f"您的新密碼為：{random_password}\n"))  #郵件內容
 
     with smtplib.SMTP(host="smtp.gmail.com", port="587") as smtp:  # 設定SMTP伺服器
@@ -389,7 +391,7 @@ def forget_password():
     with db.cursor() as cursor:
             
         try:
-            command = f'UPDATE member SET password = "{random_password}" WHERE account = "{current_user.id}";'
+            command = f'UPDATE member SET password = "{random_password}" WHERE account = "{account}";'
             cursor.execute(command)
             db.commit()
         except:
