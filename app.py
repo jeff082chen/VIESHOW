@@ -845,4 +845,4 @@ def not_found(e):
     return render_template('error.html', error = '500 Internal Server Error', description = '請聯絡客服尋求進一步的協助'), 500
 
 if __name__ == '__main__':
-    app.run(debug = True, port = 5000)
+    app.run(port = 5000)
