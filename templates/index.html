@@ -33,8 +33,8 @@
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div class="top-search">
-									<select class="form-control" id="movies" name="movies">
-										<option><strong>請選擇影片</strong></option>
+									<select class="form-control" id="movies" name="movies" required>
+										<option value="" disabled selected><strong>請選擇影片</strong></option>
 									</select>
 								</div>
 							</div>
@@ -42,8 +42,8 @@
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div class="top-search">
-									<select class="form-control" id="dates" name="dates">
-										<option><strong>請選擇日期</strong></option>
+									<select class="form-control" id="dates" name="dates" required>
+										<option value="" disabled selected><strong>請選擇日期</strong></option>
 									</select>
 								</div>
 							</div>
@@ -51,8 +51,8 @@
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<div class="top-search">
-									<select class="form-control" id="times" name="session_id">
-										<option><strong>請選擇場次</strong></option>
+									<select class="form-control" id="times" name="session_id" required>
+										<option value="" disabled selected><strong>請選擇場次</strong></option>
 									</select>
 								</div>
 							</div>
@@ -61,7 +61,7 @@
 							<div class="col-md-6 form-it">
 								<div style="display:block; margin: 0 10%; float:left;">
 									<button type="submit" style="background-color: #233a50; color: #abb7c4;">前往訂票</button>
-									<button type="button" style="background-color: #233a50; color: #abb7c4;" id="seat"><a target="_blank" href="#">查看座位</a></button>
+									<button type="button" style="background-color: #233a50; color: #abb7c4;" id="seat"><a href="#">查看座位</a></button>
 								</div>
 							</div>
 						</div>
@@ -92,7 +92,7 @@
         fetch('/movie_choice?cinema=' + value1).then(function(response){
 
             response.json().then(function(data){
-                let optionHTML = '<option><strong>請選擇影片</strong></option>';
+                let optionHTML = '<option value="" disabled selected><strong>請選擇影片</strong></option>';
 
 				for(let opt of data.movies){
 					optionHTML += '<option value ="'  + opt + '">' + opt + '</option>';
@@ -109,17 +109,17 @@
             fetch('/movie_choice?cinema=' + value1).then(function(response){
 
                 response.json().then(function(data){
-                    let optionHTML = '<option><strong>請選擇影片</strong></option>';
+                    let optionHTML = '<option value="" disabled selected><strong>請選擇影片</strong></option>';
 
                     for(let opt of data.movies){
                         optionHTML += '<option value ="'  + opt + '">' + opt + '</option>';
                     }
 
                     movies.innerHTML = optionHTML;
-					dates.innerHTML = '<option><strong>請選擇日期</strong></option>';
-					times.innerHTML = '<option><strong>請選擇場次</strong></option>';
+					dates.innerHTML = '<option value="" disabled selected><strong>請選擇日期</strong></option>';
+					times.innerHTML = '<option value="" disabled selected><strong>請選擇場次</strong></option>';
 					let seat = document.getElementById('seat')
-					seat.innerHTML = '<a target="_blank" href="#">查看座位</a>'
+					seat.innerHTML = '<a href="#">查看座位</a>'
                 });
             });
         }
@@ -131,16 +131,16 @@
             fetch('/date_choice?cinema=' + value1 + '&movie=' + value2).then(function(response){
 
                 response.json().then(function(data){
-                    let optionHTML = '<option><strong>請選擇日期</strong></option>';
+                    let optionHTML = '<option value="" disabled selected><strong>請選擇日期</strong></option>';
 
                     for(let opt of data.dates){
                         optionHTML += '<option value ="'  + opt + '">' + opt + '</option>';
                     }
 
                     dates.innerHTML = optionHTML;
-					times.innerHTML = '<option><strong>請選擇場次</strong></option>';
+					times.innerHTML = '<option value="" disabled selected><strong>請選擇場次</strong></option>';
 					let seat = document.getElementById('seat')
-					seat.innerHTML = '<a target="_blank" href="#">查看座位</a>'
+					seat.innerHTML = '<a href="#">查看座位</a>'
                 });
             });
         }
@@ -153,7 +153,7 @@
             fetch('/time_choice?cinema=' + value1 + '&movie=' + value2 + '&date=' + value3).then(function(response){
 
                 response.json().then(function(data){
-                    let optionHTML = '<option><strong>請選擇場次</strong></option>';
+                    let optionHTML = '<option value="" disabled selected><strong>請選擇場次</strong></option>';
 
                     for(let opt of data.times){
                         optionHTML += '<option value ="'  + opt[0] + '">' + opt[1] + '</option>';
@@ -161,7 +161,7 @@
 
                     times.innerHTML = optionHTML;
 					let seat = document.getElementById('seat')
-					seat.innerHTML = '<a target="_blank" href="#">查看座位</a>'
+					seat.innerHTML = '<a href="#">查看座位</a>'
                 });
             });
         }
