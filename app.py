@@ -626,7 +626,7 @@ def ticket_record():
             movie_ses = request.form['session_id'], 
             ticket_type = 0 if request.form['ticket_type'] == 'general' else 1, 
             type_price = request.form['total_price'], 
-            mem_point = request.form['point'], 
+            mem_point = request.form['point'] if request.form['point'] != '' else 0, 
             large_popcorn = request.form['large_popcorn'],
             medium_popcorn = request.form['medium_popcorn'],
             small_popcorn = request.form['small_popcorn'],
